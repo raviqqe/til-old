@@ -1,0 +1,47 @@
+JkSendMessage
+
+S9SendMessage
+
+
+## candidates
+
+### lower_case_namespace and CamelCaseIdentifiers
+
+```
+s9_SendMessage
+s9_Word_Of
+s9_Word
+s9_NodeMemory
+s9_NodeMemory_At
+s9_NodeMemory_GetNodeAt
+```
+
+### traditional_lower_case_identifiers
+
+```
+JK_DUMMY_WORD
+JK_DUMMY_INT
+JK_DUMMY_REAL
+
+jk_word_t
+jk_int_t
+jk_real_t
+jk_word_t
+jk_get_node_from_node_memory
+jk_node_memory_t
+```
+
+or
+
+```
+SQ_DUMMY_WORD
+SQ_DUMMY_INT
+SQ_DUMMY_REAL
+
+sq_word_t
+sq_int_t
+sq_real_t
+sq_word_t
+sq_get_node_from_node_memory
+sq_node_memory_t
+```
