@@ -4,4 +4,9 @@ copyright = "/copy.html"
 valid_extensions = [".py", ".png", ".jpeg", ".jpg"]
 icon = "/favicon.ico"
 phone_icon = "/apple-touch-icon.png"
-hidden_files = ["/copy.html", "/favicon.ico", "/apple-touch-icon.png"]
+hidden_files = [
+  "/copy.html",
+  "style.css",
+  "/favicon.ico",
+  "/apple-touch-icon.png"
+]
