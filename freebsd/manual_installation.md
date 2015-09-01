@@ -80,55 +80,46 @@ $ mount /dev/ada0s1a /mnt
 
 ## Installing the system
 
-Extract the archived files of the system and install them on the root filesystem.
+Extract and install the archived files of the system on the root filesystem.
 
 ```
-  $ cd <i>mountpoint</i><br/>
-  $ tar -xvpf /usr/freebsd-dist/base.txz<br/>
-  $ tar -xvpf /usr/freebsd-dist/kernel.txz<br/>
-  $ tar -xvpf /usr/freebsd-dist/ports.txz<br/>
-  $ tar -xvpf /usr/freebsd-dist/src.txz<br/>
-  $ tar -xvpf /usr/freebsd-dist/doc.txz<br/>
-  $ tar -xvpf /usr/freebsd-dist/games.txz
+  $ cd /mnt
+  $ tar -xvpf /usr/freebsd-dist/base.txz
+  $ tar -xvpf /usr/freebsd-dist/kernel.txz
+  $ tar -xvpf /usr/freebsd-dist/ports.txz # optional
+  $ tar -xvpf /usr/freebsd-dist/src.txz # optional
+  $ tar -xvpf /usr/freebsd-dist/doc.txz # optional
+  $ tar -xvpf /usr/freebsd-dist/games.txz # optional
 ```
 
-Edit <i>mountpoint</i>/etc/fstab.
+Edit /mnt/etc/fstab.
 
 ```
-  # dev mp fstype options dump pass<br/>
-  /dev/<i>partdev</i> / ufs rw 0 1<br/>
-  /dev/<i>swappartdev</i> none swap sw 0 0
+# device mountpoint fstype options dump pass
+/dev/<i>partdev</i> / ufs rw 0 1
+/dev/<i>swappartdev</i> none swap sw 0 0
 ```
 
-Edit <i>mountpoint</i>/etc/rc.conf.
+Edit /mnt/etc/rc.conf.
 
 ```
-  keymap="<i>yourkeymap</i>"<br/>
-  hostname="<i>yourhostname</i>"<br/>
-  ifconfig_<i>ethdev</i>="DHCP"
+keymap="jp.106"
+hostname="raviqqe.com"
+ifconfig_re0="DHCP"
 ```
 
 Finally, reboot into your new system.
 
 ```
-  $ cd<br/>
-  $ umount <i>mountpoint</i><br/>
-  $ reboot
-```
-<?php section\name("After installation"); ?>
-
-Create alias database for ```sendmail``` in the new system.
-
-```
-  $ make -C /etc/mail aliases
+$ cd
+$ umount /mnt
+$ reboot
 ```
 
-<i>idxnum</i> : 1 (the index number of the freebsd-boot slice)<br/>
-<i>bsdpartition</i> : ada0s2<br/>
-<i>bsdsubpartition</i> : ada0s2a<br/>
-<i>partdev</i> : ada0p3<br/>
-<i>swappartdev</i> : ada0p2<br/>
-<i>mountpoint</i> : /mnt<br/>
-<i>yourkeymap</i> : jp.106<br/>
-<i>yourhostname</i> : myfavecom<br/>
-<i>ethdev</i> : re0
+## After installation
+
+Create alias database for `sendmail` in the new system.
+
+```
+$ make -C /etc/mail aliases
+```
