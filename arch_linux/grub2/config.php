@@ -1,0 +1,2 @@
+<?php
+$TITLE="Grub2";

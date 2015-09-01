@@ -1,0 +1,2 @@
+<?php
+listupcommands($commands);

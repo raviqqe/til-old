@@ -1,0 +1,2 @@
+<?php
+$TITLE = "System Management";

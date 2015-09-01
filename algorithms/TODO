@@ -1,0 +1,53 @@
+theme: algorithm
+
+delimiters for php script are below
+//START
+//END
+
+php
+-------------------------------------
+functions.php - cut function
+
+
+algorithm
+----------------------------------------
+# stack and que
+stack
+que
+
+# recursive procedure
+hanoi's tower
+fivonach
+
+# sort
+bubble
+select
+heap
+insertion
+quick
+shell
+merge
+
+# search
+linear
+binary
+hash
+
+# tree
+binary search tree
+self-balancing binary search tree
+abl tree
+b tree
+digital search tree
+red and black tree
+(search efficiency)
+
+# graph
+dijkstra
+floyd
+
+# solution search
+
+# others
+euclid gcd
+genetic
