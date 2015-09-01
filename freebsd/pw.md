@@ -6,9 +6,10 @@ For server administrators, creating daemon users is a common task.
 Creating its own user and running each deamon program as him
 keeps the server more secure than runnning it as a root user.
 I usually create them by the command below.
-`-s /nonexistent` option prevents the daemons from logging in and omitting `-m`
-option doesn't create their home directories.
+`-s /usr/sbin/nologin` option prevents the daemons from logging in
+and omitting `-m` option and putting `-d /nonexistent` gives them
+no home directory.
 
 ```
-$ pw useradd <user name> [-c <comment>] -s /nonexistent
+$ pw useradd <user name> [-c <comment>] -d /nonexistent -s /usr/sbin/nologin
 ```
