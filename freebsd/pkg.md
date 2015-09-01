@@ -1,3 +1,4 @@
+# pkgng, the package management command
 <?php section\name("Installation"); ?>
 
 Install ```ports-mgmt/pkg``` from ports.

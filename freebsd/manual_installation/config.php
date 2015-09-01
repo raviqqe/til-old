@@ -1,2 +1,0 @@
-<?php
-$TITLE="Manual Installation";
