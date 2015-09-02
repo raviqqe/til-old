@@ -1,5 +1,7 @@
 # AUR, the Arch User Repository
 
+Posted on 2015/9/1
+
 ## Preparation
 
 Make sure that the `base-devel` package is installed.

@@ -1,6 +1,6 @@
 # ABS, the Arch Build System
 
-Posted on 2015/09/01
+Posted on 2015/9/1
 
 ## Installation of ABS
 
