@@ -8,7 +8,7 @@ First, append the SSID and passphrase of your wireless router
 to its configuration file.
 
 ```
-$ wpa_passphrase YOUR_SSID YOUR_PASSPHRASE &gt;&gt; /etc/wpa_supplicant.conf
+$ wpa_passphrase YOUR_SSID YOUR_PASSPHRASE >> /etc/wpa_supplicant.conf
 ```
 
 Then, edit `rc.conf`.

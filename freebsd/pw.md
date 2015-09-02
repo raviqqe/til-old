@@ -1,4 +1,13 @@
-# pw
+# pw, the user and group management command
+
+## Creating users for humen
+
+`-m` option is necessary to create their home directories.
+
+```
+$ pw useradd <user name> -m -G <additional groups separated by commas> \
+    -s <shell>
+```
 
 ## Creating daemon users
 
