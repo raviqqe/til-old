@@ -1,12 +1,12 @@
-title = "my homepage | this is test"
+title = "raviqqe.com"
 css = ["/style.css"]
 copyright = "/copy.html"
-valid_extensions = [".py", ".png", ".jpeg", ".jpg"]
+valid_extensions = [".c", ".h", ".py", ".png", ".jpeg", ".jpg"]
 icon = "/favicon.ico"
 phone_icon = "/apple-touch-icon.png"
 hidden_files = [
-  "/copy.html",
+  "copy.html",
   "style.css",
-  "/favicon.ico",
-  "/apple-touch-icon.png"
+  "favicon.ico",
+  "apple-touch-icon.png"
 ]
