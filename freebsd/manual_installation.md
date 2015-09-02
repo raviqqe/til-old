@@ -1,5 +1,7 @@
 # Manual Installation
 
+Posted on 2015/9/2
+
 ## Creating partitions with GPT
 
 First, create a new GPT parttion scheme on your storage device.
