@@ -1,5 +1,7 @@
 # pw, the user and group management command
 
+Posted on 2015/9/2
+
 ## Creating users for humen
 
 `-m` option is necessary to create their home directories.

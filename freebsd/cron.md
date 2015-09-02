@@ -1,5 +1,7 @@
 # cron
 
+Posted on 2015/9/1
+
 ## Updating the system automatically
 
 Edit root's crontab.
@@ -8,7 +10,7 @@ Edit root's crontab.
 sudo crontab -e
 ```
 
-The crontab is below.
+An example of crontab which updates ports and the base system daily is below.
 
 ```
 SHELL=/bin/sh
