@@ -8,7 +8,6 @@ through it.
 The way to install FreeBSD 10.2 is below. I used the ISO image on the FreeBSD
 website, FreeBSD-10.2-RELEASE-amd64-bootonly.iso.
 
-
 ## Uploading ISO image
 
 First, download the latest ISO image from the FreeBSD website to your local
@@ -34,9 +33,10 @@ The point to watch out is network configuration. While you may set up both IPv4
 and IPv6, set the fixed IP addresses, gateways' addresses and etc provided by
 Sakura and don't set up either DHCP or SLAAC.
 
-(Caution) When you are setting up IPv6's default gateway, the address provided
-by Sakura may be a link local address. If so, don't forget to append the scope
-ID back of it. On FreeBSD or other Unix-like OS such as Linux, you may just add
+(Caution) When you are setting up a default gateway with IPv6,
+the address provided by Sakura may be a link local address.
+If so, don't forget to append the scope ID back of it.
+On FreeBSD or other Unix-like OS such as Linux, you may just add
 '%' and an interface name, such as `vtnet0` (e.g. fe80::1%vtnet0).
 On rc.conf, for example;
 
