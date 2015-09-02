@@ -1,4 +1,6 @@
-# pkgng, the package management command
+# pkg, the binary package management command
+
+Posted on 2015/9/2
 
 ## Installation
 
@@ -12,6 +14,7 @@ Or, alternatively install `ports-mgmt/pkg` from ports.
 ```
 $ pkg install <package name>
 ```
+
 ## Removing packages
 
 ```
