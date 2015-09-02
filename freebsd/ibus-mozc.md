@@ -1,5 +1,7 @@
 # Using mozc with ibus
 
+Posted on 2015/9/2
+
 ## Installation
 
 Install `ja-ibus-mozc`.
@@ -21,10 +23,10 @@ export XMODIFIERS=@im=ibus
 ibus-daemon -r --daemonize --xim
 ```
 
-Launch `ibus-setup`, go to 'Input Method' tab and add `mozc` as a
+Launch `ibus-setup` command, go to 'Input Method' tab and add `mozc` as a
 input method in the 'Japanese' section.
 
-Finally, reboot your system.
+Finally, reboot your system and launch X window system.
 
 ## US keyboard
 
