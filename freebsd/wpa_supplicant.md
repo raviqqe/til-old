@@ -1,5 +1,7 @@
 # wpa\_supplicant, the wifi client daemon
 
+Posted on 2015/9/2
+
 # Setting up the connection
 
 `wpa_supplicant` is in base.
@@ -8,7 +10,7 @@ First, append the SSID and passphrase of your wireless router
 to its configuration file.
 
 ```
-$ wpa_passphrase YOUR_SSID YOUR_PASSPHRASE >> /etc/wpa_supplicant.conf
+$ wpa_passphrase <SSID> <passphrase> >> /etc/wpa_supplicant.conf
 ```
 
 Then, edit `rc.conf`.
