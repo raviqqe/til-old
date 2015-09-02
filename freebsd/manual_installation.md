@@ -83,21 +83,21 @@ $ mount /dev/ada0s1a /mnt
 Extract and install the archived files of the system on the root filesystem.
 
 ```
-  $ cd /mnt
-  $ tar -xvpf /usr/freebsd-dist/base.txz
-  $ tar -xvpf /usr/freebsd-dist/kernel.txz
-  $ tar -xvpf /usr/freebsd-dist/ports.txz # optional
-  $ tar -xvpf /usr/freebsd-dist/src.txz # optional
-  $ tar -xvpf /usr/freebsd-dist/doc.txz # optional
-  $ tar -xvpf /usr/freebsd-dist/games.txz # optional
+$ cd /mnt
+$ tar -xvpf /usr/freebsd-dist/base.txz
+$ tar -xvpf /usr/freebsd-dist/kernel.txz
+$ tar -xvpf /usr/freebsd-dist/ports.txz # optional
+$ tar -xvpf /usr/freebsd-dist/src.txz # optional
+$ tar -xvpf /usr/freebsd-dist/doc.txz # optional
+$ tar -xvpf /usr/freebsd-dist/games.txz # optional
 ```
 
 Edit /mnt/etc/fstab.
 
 ```
 # device mountpoint fstype options dump pass
-/dev/<i>partdev</i> / ufs rw 0 1
-/dev/<i>swappartdev</i> none swap sw 0 0
+/dev/ada0p2 / ufs rw 0 1 # /dev/ada0s1a for MBR
+/dev/ada0p3 none swap sw 0 0 # /dev/ada0s1b for MBR
 ```
 
 Edit /mnt/etc/rc.conf.
