@@ -1,2 +1,0 @@
-<?php
-$TITLE="Operaitng System";
