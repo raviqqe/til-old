@@ -1,7 +1,7 @@
 title = "raviqqe.com"
 css = ["/style.css"]
 copyright = "/copy.html"
-valid_extensions = [".c", ".h", ".py", ".png", ".jpeg", ".jpg"]
+valid_extensions = [".c", ".h", ".py", ".png", ".jpeg", ".jpg", ".svg"]
 icon = "/favicon.ico"
 phone_icon = "/apple-touch-icon.png"
 hidden_files = [
