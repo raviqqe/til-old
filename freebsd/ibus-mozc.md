@@ -1,4 +1,4 @@
-# Using mozc with ibus
+# mozc, the Japanese input method (with ibus)
 
 Posted on 2015/9/2
 

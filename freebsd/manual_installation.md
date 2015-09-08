@@ -1,4 +1,4 @@
-# Manual Installation
+# Manual installation
 
 Posted on 2015/9/2
 

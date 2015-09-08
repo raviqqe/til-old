@@ -1,4 +1,4 @@
-# cron
+# cron, the conventional job schedular
 
 Posted on 2015/9/1
 

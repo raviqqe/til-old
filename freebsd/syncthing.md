@@ -1,10 +1,11 @@
-# syncthing
+# syncthing, the file synchronization software
 
 Posted on: 2015/9/8
 
 syncthing is a software that realize your own cloud file server replacing
 proprietary ones such as Dropbox and Box.
-The most remarkable feature of it is, I think, its P2P-like architecture.
+The most remarkable feature of it is, I think, its P2P-like architecture
+similar to BitTorrent Sync.
 There is no concept like servers or clients.
 Each __device__ is connected with each other online
 so that every instance of files and directories to be synchronized is copied
