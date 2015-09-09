@@ -58,3 +58,42 @@ And, then, add the device's ID to some folder elements.
 
 For more details about syncthing, see
 [the official documentation](http://docs.syncthing.net).
+
+## discorv, the device discovery server
+
+When you come to configure syncthing by GUI or `config.xml`,
+a question how the devices finds each other may come to your mind
+because, in configuration, all need to be set up are
+not any IP address and port but only their IDs.
+The discovery servers of syncthing take the role of it for devices to know
+the network locations of other devices.
+
+The default discovery servers of IPv4 and IPv6 will be found
+in a `<options>` element in `~/.config/syncthing/config.xml`.
+It is the official dicovery servers of syncthing.net.
+
+Of course, you can set up and run your own discovery server.
+On FreeBSD, just add a following line to `/etc/rc.conf`.
+
+```
+syncthingdiscosrv_enable="YES"
+```
+
+Then, start the daemon.
+
+```
+$ service syncthing-discosrv start
+```
+
+To enable it as one of discovery servers for your devices,
+add it to their configuration file, `~/.config/syncthing/config.xml`.
+Note that the default port number of discovery servers is 22026
+unless you set another one on the command line.
+
+```
+<options>
+  ...
+  <globalAnnounceServer>udp4://your.domain.com:22026</globalAnnounceServer>
+  ...
+</options>
+```
