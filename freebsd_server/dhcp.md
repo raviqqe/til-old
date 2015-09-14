@@ -22,9 +22,9 @@ ddns-update-style none;
 authoritative;
 ...
 subnet 192.168.0.0 netmask 255.255.255.0 {
-  gcrange 192.168.0.128 192.168.0.254;
-  gcoption routers 192.168.0.1;
-  gcoption broadcast-address 192.168.0.255;
+  range 192.168.0.128 192.168.0.254;
+  option routers 192.168.0.1;
+  option broadcast-address 192.168.0.255;
 }
 ```
 
