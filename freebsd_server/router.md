@@ -1,5 +1,7 @@
 # Router
 
+THIS PAGE IS WORK IN PROGRESS.
+
 # Router configuration
 
 Edit `/etc/rc.conf`.
