@@ -1,5 +1,7 @@
 # DNS content server with nsd
 
+Updated on February 23, 2016: Tested with nsd v4.1.7
+
 This is how to build a DNS content (authoritative) server with `nsd`,
 one of the implementations.
 
