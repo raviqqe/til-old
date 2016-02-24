@@ -72,7 +72,7 @@ $ nsd-control reload
 ```
 
 
-## Troubleshoots
+## Troubleshooting
 
 When something wrong is in `nsd.conf`, or any other zone files,
 `nsd` doesn't work and serve names properly.
@@ -84,6 +84,32 @@ $ nsd-checkconf /usr/local/etc/nsd/nsd.conf
 
 ```
 $ tail /var/log/nsd.log
+```
+
+
+### Authoritative servers in public
+
+If you are building your own authoritative server in public,
+the replies to queries must be with their AA bit on.
+So, then, you must run `nsd` alone, or pass queries to `nsd`
+via `forward-zone:` directives in `unbound.conf`
+when `unbound` monopolizes the port 53.
+
+
+### Reallocation of ip addresses and ports
+
+When you changed ip addresses or ports used by `nsd` in `nsd.conf`,
+you must restart `nsd` to reallocate them.
+`nsd-control reload` doesn't do that.
+
+```
+$ service nsd restart
+```
+
+### Testing with `drill`
+
+```
+$ drill -p 53 your.domain.com @127.0.0.1
 ```
 
 
