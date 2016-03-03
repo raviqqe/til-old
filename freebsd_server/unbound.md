@@ -128,3 +128,9 @@ $ unbound-checkconf /usr/local/etc/unbound/unbound.conf
 * unbound
 * unbound-control
 * unbound-checkconf
+
+
+## References
+
+* [Unbound DNS Server Tutorial @ Calomel.org](https://calomel.org/unbound_dns.html)
+* [nlnetlabs.nl :: Unbound](https://www.nlnetlabs.nl/projects/unbound/)
