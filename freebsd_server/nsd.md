@@ -118,3 +118,9 @@ $ drill -p 53 your.domain.com @127.0.0.1
 * nsd
 * nsd-control
 * nsd-checkconf
+
+
+## References
+
+* [NSD DNS Server Tutorial @ Calomel.org](https://calomel.org/nsd_dns.html)
+* [nlnetlabs.nl :: Name Server Daemon (NSD)](https://www.nlnetlabs.nl/projects/nsd/)
