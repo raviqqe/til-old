@@ -1,1 +1,1 @@
-# Haskell Tips
+# Haskell
