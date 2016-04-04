@@ -36,6 +36,11 @@ $ docker run -it docker.io/centos sh
 `docker stop CONTAINER_ID`
 
 
+## Removing a stopped container
+
+`docker rm CONTAINER_ID
+
+
 ## Listing up running containers
 
 `docker ps`
