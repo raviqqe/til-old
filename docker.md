@@ -60,7 +60,7 @@ $ docker pull -a docker.io/ubuntu
 ```
 
 
-## Building a image
+## Building an image
 
 `docker build -t REPO_NAME[:TAG_NAME] ABS_PATH`
 
