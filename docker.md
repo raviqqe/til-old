@@ -63,3 +63,8 @@ $ docker pull -a docker.io/ubuntu
 ## Building a image
 
 `docker build -t REPO_NAME[:TAG_NAME] ABS_PATH`
+
+
+## Removing an image
+
+`docker rmi IMAGE_NAME`
