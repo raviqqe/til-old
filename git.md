@@ -24,7 +24,7 @@ $ git rm $path_to_submodule
 ```
 
 
-# `git add`
+## `git add`
 
 To commit a part of a file,
 
