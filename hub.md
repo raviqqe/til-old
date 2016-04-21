@@ -9,7 +9,7 @@
   $ git clone https://github.com/$your_name/$the_repo.git
   ```
 
-3. Make the feature branch.
+3. Make a new (feature) branch.
 
   ```
   $ cd $the_repo
