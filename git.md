@@ -31,3 +31,12 @@ To commit a part of a file,
 ```
 $ git add --patch $file
 ```
+
+
+## `git rebase`
+
+To rebase commits to a branch interactively,
+
+```
+$ git rebase -i
+```
