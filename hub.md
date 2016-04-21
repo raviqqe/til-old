@@ -39,7 +39,7 @@
   ```
 
 9. Rebase your feature branch
-  See also `-i` option of `git rebase`.
+  See also `-i` option of `git rebase` for interactive rebasing.
 
   ```
   $ git checkout $branch_name
