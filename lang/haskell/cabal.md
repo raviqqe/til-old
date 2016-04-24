@@ -73,3 +73,12 @@ $ runhaskell Setup.hs configure --user
 $ runhaskell Setup.hs build
 $ runhaskell Setup.hs install
 ```
+
+
+## Starting a new project
+
+```
+$ cabal init
+```
+
+Then, edit the `$project_name.cabal` file.
