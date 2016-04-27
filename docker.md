@@ -19,12 +19,16 @@ docker search TERM
 
 ## Pulling images in remote repositories
 
-`docker pull IMAGE_NAME`
+```
+docker pull IMAGE_NAME
+```
 
 
 ## Running a container
 
-`docker run IMAGE_NAME [COMMAND [ARG...]]`
+```
+docker run IMAGE_NAME [COMMAND [ARG...]]
+```
 
 ### Examples
 
@@ -37,7 +41,9 @@ $ docker run -it docker.io/centos sh
 
 ## Stop runnning a container
 
-`docker stop CONTAINER_ID`
+```
+docker stop CONTAINER_ID
+```
 
 
 ## Removing a stopped container
@@ -54,7 +60,9 @@ docker rm $(docker ps -a -q)
 
 ## Listing up running containers
 
-`docker ps`
+```
+docker ps
+```
 
 
 ## Attaching to a running container
