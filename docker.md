@@ -5,12 +5,16 @@ Posted on: 2016/4/4
 
 ## Listing up local images
 
-`docker images`
+```
+docker images
+```
 
 
 ## Searching images in remote repositories
 
-`docker search TERM`
+```
+docker search TERM
+```
 
 
 ## Pulling images in remote repositories
@@ -38,8 +42,15 @@ $ docker run -it docker.io/centos sh
 
 ## Removing a stopped container
 
-`docker rm CONTAINER_ID`
+```
+docker rm CONTAINER_ID
+```
 
+### Removing all stopped containers
+
+```
+docker rm $(docker ps -a -q)
+```
 
 ## Listing up running containers
 
@@ -48,23 +59,40 @@ $ docker run -it docker.io/centos sh
 
 ## Attaching to a running container
 
-`docker attach CONTAINER`
+```
+docker attach CONTAINER
+```
 
 
-### Examples 
+### Examples
 
 To pull the image, `docker.io/ubuntu` with all tags,
 
 ```
-$ docker pull -a docker.io/ubuntu 
+$ docker pull -a docker.io/ubuntu
 ```
 
 
 ## Building an image
 
-`docker build -t REPO_NAME[:TAG_NAME] ABS_PATH`
+```
+docker build -t REPO_NAME[:TAG_NAME] ABS_PATH
+```
 
 
 ## Removing an image
 
-`docker rmi IMAGE_NAME`
+```
+docker rmi IMAGE_NAME
+```
+
+### Removing all untagged images
+
+```
+docker rmi $(docker images | grep '^<none>' | awk '{print $1}')
+```
+
+
+## References
+
+- [Remove untagged images from Docker](http://jimhoskins.com/2013/07/27/remove-untagged-docker-images.html)
