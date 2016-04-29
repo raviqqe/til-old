@@ -122,6 +122,13 @@ do
 done
 ```
 
+## Pusing your image to docker.io
+
+```
+$ docker login --username=$user_name --email=$email_address
+$ docker push $repo_name/$image_name
+```
+
 
 ## References
 
