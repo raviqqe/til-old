@@ -53,3 +53,12 @@
   ```
 
 11. Make a pull request on your browser
+
+
+## Forking by `hub fork` command
+
+```
+$ git clone https://github.com/$someone/$repo
+$ cd $repo
+$ hub fork # enter your username and password on GitHub
+```
