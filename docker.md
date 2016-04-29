@@ -38,6 +38,19 @@ Run a image, get into it, and work with it interactively.
 $ docker run -it docker.io/centos sh
 ```
 
+To create an image from a running container,
+
+```
+$ docker stop $container_id
+$ docker commit $container_id $image_name
+```
+
+## Tips
+
+- Add `--privileged` option to enable a docker container
+  to do some privileged action, such as changing their hostname
+  with `hostname` command.
+
 
 ## Stop runnning a container
 
@@ -98,6 +111,15 @@ docker rmi IMAGE_NAME
 
 ```
 docker rmi $(docker images | grep '^<none>' | awk '{print $1}')
+```
+
+## Runnning multiple docker containers with some daemon command
+
+```
+for id in $(seq 1 10)
+do
+  docker run -d -h "$basehostname$id.com" $image_name
+done
 ```
 
 
