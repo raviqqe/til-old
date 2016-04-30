@@ -62,3 +62,13 @@ $ git clone https://github.com/$someone/$repo
 $ cd $repo
 $ hub fork # enter your username and password on GitHub
 ```
+
+
+## Sending pull-request to upstream
+
+```
+$ hub pull-request
+```
+
+Then, write a title and message appended to the pull-request
+in the same format as git's commit message.
