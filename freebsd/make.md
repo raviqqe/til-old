@@ -14,3 +14,5 @@ SVN_UPDATE = yes
 
 DEFAULT_VERSIONS = python=3.5 python3=3.5 ruby=2.3
 ```
+
+For more information, see `man make.conf` and `/usr/ports/Mk/bsd.port.mk`.
