@@ -86,7 +86,7 @@ Error: No Ruby found, cannot proceed.
 or
 
 ```
-Error: Git is not in your PATH
+Error: Git must be installed and in your PATH!
 ```
 
 Install ruby.
