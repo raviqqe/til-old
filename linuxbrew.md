@@ -61,3 +61,20 @@ Install `unzip` first.
 $ brew install unzip
 $ brew install neovim/neovim/neovim
 ```
+
+
+## Troubleshooting
+
+When you see something like:
+
+```
+Error: No Ruby found, cannot proceed.
+```
+
+or
+
+```
+Error: Git is not in your PATH
+```
+
+Install ruby.
