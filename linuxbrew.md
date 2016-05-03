@@ -42,6 +42,18 @@ $ brew update
 ```
 
 
+## Reinstallation
+
+First, delete directories related to linuxbrew.
+
+```
+$ rm -rf $linuxbrew_dir # e.g. ~/.linuxbrew
+$ rm -rf .cache/Homebrew
+```
+
+Then, follow the installation section above.
+
+
 ## Installing XXX On Ubuntu
 
 ### Vim
