@@ -42,6 +42,18 @@ $ brew update
 ```
 
 
+## Reinstallation
+
+First, delete directories related to linuxbrew.
+
+```
+$ rm -rf $linuxbrew_dir # e.g. ~/.linuxbrew
+$ rm -rf .cache/Homebrew
+```
+
+Then, follow the installation section above.
+
+
 ## Installing XXX On Ubuntu
 
 ### Vim
@@ -61,3 +73,20 @@ Install `unzip` first.
 $ brew install unzip
 $ brew install neovim/neovim/neovim
 ```
+
+
+## Troubleshooting
+
+When you see something like:
+
+```
+Error: No Ruby found, cannot proceed.
+```
+
+or
+
+```
+Error: Git must be installed and in your PATH!
+```
+
+Install ruby.
