@@ -110,7 +110,7 @@ docker rmi IMAGE_NAME
 ### Removing all untagged images
 
 ```
-docker rmi $(docker images | grep '^<none>' | awk '{print $1}')
+docker rmi $(docker images | grep '^<none>' | awk '{print $3}')
 ```
 
 ## Runnning multiple docker containers with some daemon command
