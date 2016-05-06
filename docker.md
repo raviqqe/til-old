@@ -45,7 +45,7 @@ $ docker stop $container_id
 $ docker commit $container_id $image_name
 ```
 
-## Tips
+### Tips
 
 - Add `--privileged` option to enable a docker container
   to do some privileged action, such as changing their hostname
