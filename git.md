@@ -23,6 +23,9 @@ $ git submodule deinit $path_to_submodule
 $ git rm $path_to_submodule
 ```
 
+To replace a submodule with another one, just edit its URI in `.gitmodule`.
+And, then run `git submodule sync`.
+
 
 ## `git add`
 
@@ -40,3 +43,8 @@ To rebase commits to a branch interactively,
 ```
 $ git rebase -i
 ```
+
+
+## References
+
+- [How do I remove a submodule?](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule)
