@@ -45,6 +45,23 @@ $ git rebase -i
 ```
 
 
+## `git tag`
+
+Unannotated tags are tags have only names.
+To tag a commit without annotation,
+
+```
+$ git tag $tag_name
+```
+
+Annotated tags are tags have names and messages.
+To tag a commit with annotation,
+
+```
+$ git tag -a $tag_name [-m $message]
+```
+
+
 ## References
 
 - [How do I remove a submodule?](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule)
