@@ -35,8 +35,17 @@ $ pkg upgrade
 
 ## Updating the repository catalogue
 
-(Notice) When you get error messages like "failed checksum from repository",
-Try this command which updates the repositories' metadata explicitly.
+When you get error messages like "failed checksum from repository"
+or the below,
+
+```
+Fetching ja-ibus-mozc-2.17.2106.102.txz: 100%  293 KiB  18.8kB/s    00:16
+pkg: cached package ja-ibus-mozc-2.17.2106.102: size mismatch, fetching from remote
+Fetching ja-ibus-mozc-2.17.2106.102.txz: 100%  293 KiB 150.2kB/s    00:02
+pkg: cached package ja-ibus-mozc-2.17.2106.102: size mismatch, cannot continue
+```
+
+try this command which updates the repositories' metadata forcibly.
 
 ```
 $ pkg update -f
