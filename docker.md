@@ -130,6 +130,17 @@ $ docker push $repo_name/$image_name
 ```
 
 
+## Troubleshooting
+
+### After docker failed with a device full error, it says `Error runnning ... dm_task_run failed` with most of subcommands...
+
+Remove docker's directory.
+On Fedora 23, it is at `/var/lib/docker`.
+
+(Is this the best way to deal with it?)
+
+
+
 ## References
 
 - [Remove untagged images from Docker](http://jimhoskins.com/2013/07/27/remove-untagged-docker-images.html)
