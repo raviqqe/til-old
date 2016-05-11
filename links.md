@@ -13,3 +13,4 @@
 - Fun!
   - [reddit](http://www.reddit.com/): the center of the Internet
   - [Ratatype](http://www.ratatype.com/): The best ever typing tutorial & game
+  - [ZType](http://zty.pe): The cool typing game of shooting
