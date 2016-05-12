@@ -28,3 +28,4 @@ to shut down the connection.
 ## References
 
 - [ssh 技術文書: リモートへのトンネルと、リモートからのトンネルの例](http://www.xdip.com/?id=ssh-tunnel)
+- [Properly Close a Frozen SSH Session](http://blog.infertux.com/2012/12/20/properly-close-a-frozen-ssh-session/)
