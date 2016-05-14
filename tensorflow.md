@@ -5,6 +5,11 @@
 (WIP)
 
 
+## Use non-blocking thread pool
+
+Compile TensorFlow from source defining `TENSORFLOW_USE_EIGEN_THREADPOOL`.
+
+
 
 ## References
 
