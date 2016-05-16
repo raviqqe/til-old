@@ -129,6 +129,18 @@ $ docker login --username=$user_name --email=$email_address
 $ docker push $repo_name/$image_name
 ```
 
+## Saving and loading images from and to tarballs
+
+```
+$ docker save $image > foo.tar
+```
+
+`load` command extracts tag names in addition to images themselves.
+
+```
+$ docker load < foo.tar
+```
+
 
 ## Troubleshooting
 
