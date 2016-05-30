@@ -167,3 +167,4 @@ On Fedora 23, it is at `/var/lib/docker`.
 ## References
 
 - [Remove untagged images from Docker](http://jimhoskins.com/2013/07/27/remove-untagged-docker-images.html)
+- [dockerで、pathの場所を、/var/lib/dockerから/mnt/foobar/に変更する方法 (Fedora版)](http://qiita.com/cat-in-136/items/f358a1bd08ae4b037ea1)
