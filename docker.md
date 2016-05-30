@@ -141,6 +141,17 @@ $ docker save $image > foo.tar
 $ docker load < foo.tar
 ```
 
+## Moving docker directory (on Fedora 23)
+
+```
+$ systemctl stop docker.service
+$ mv /var/lib/docker /home/docker # old to new
+$ vi /etc/sysconfig/docker
+$ grep OPTIONS /etc/sysconfig/docker
+OPTIONS='--selinux-enabled --log-driver=journald -g /home/docker'
+$ systemctl start docker.service
+```
+
 
 ## Troubleshooting
 
