@@ -62,6 +62,14 @@ $ git tag -a $tag_name [-m $message]
 ```
 
 
+## Undoing `git rebase`
+
+```
+$ git reflog # find the last commit where the `git rebase` was not done
+$ git reset --head HEAD@{$number}
+```
+
+
 ## References
 
 - [How do I remove a submodule?](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule)
