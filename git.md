@@ -70,6 +70,15 @@ $ git reset --head HEAD@{$number}
 ```
 
 
+## `git remote`
+
+To delete all stale remote branches, run:
+
+```
+$ git remote prune $remote
+```
+
+
 ## References
 
 - [How do I remove a submodule?](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule)
