@@ -81,3 +81,4 @@ http {
 ## References
 
 - [Certbot.org](https://certbot.eff.org/#freebsd-nginx)
+- [Let's Encrypt CA not included in Ubuntu's CA bundle #2026](https://github.com/certbot/certbot/issues/2026)
