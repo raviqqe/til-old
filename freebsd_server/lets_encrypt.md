@@ -1,12 +1,12 @@
 # Let's Encrypt
 
-## Installation
+## Installation (with nginx)
 
 ```
 $ pkg install py27-letsencrypt
 ```
 
-Get the certificates.
+Get the certificate.
 
 ```
 $ letsencrypt certonly
@@ -16,6 +16,45 @@ Edit crontab and add a record of running `letsencrypt renew`.
 
 ```
 $ crontab -e
+```
+
+Link the certificate and private key into nginx's configuration directory.
+
+```
+$ cd /usr/local/etc/nginx
+$ mkdir ssl
+$ cd ssl
+$ ln -s /usr/local/etc/letsencrypt/live/your.domain.com/cert.pem cert.pem
+$ ln -s /usr/local/etc/letsencrypt/live/your.domain.com/privkey.pem privkey.pem
+```
+
+Edit nginx's configuration file.
+
+```
+...
+
+http {
+  ...
+
+  server {
+    ...
+
+    listen 443 ssl;
+
+    ssl_certificate ssl/cert.pem;
+    ssl_certificate_key ssl/privkey.pem;
+
+    ...
+  }
+
+  ...
+}
+```
+
+Restart `nginx`.
+
+```
+$ service nginx restart
 ```
 
 
