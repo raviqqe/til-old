@@ -24,7 +24,7 @@ Link the certificate and private key into nginx's configuration directory.
 $ cd /usr/local/etc/nginx
 $ mkdir ssl
 $ cd ssl
-$ ln -s /usr/local/etc/letsencrypt/live/your.domain.com/cert.pem cert.pem
+$ ln -s /usr/local/etc/letsencrypt/live/your.domain.com/fullchain.pem fullchain.pem
 $ ln -s /usr/local/etc/letsencrypt/live/your.domain.com/privkey.pem privkey.pem
 ```
 
@@ -41,7 +41,7 @@ http {
 
     listen 443 ssl;
 
-    ssl_certificate ssl/cert.pem;
+    ssl_certificate ssl/fullchain.pem;
     ssl_certificate_key ssl/privkey.pem;
 
     ...
