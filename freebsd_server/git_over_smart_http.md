@@ -26,8 +26,8 @@ Add these lines to `/etc/rc.conf`.
 ```
 fcgiwrap_enable="YES"
 fcgiwrap_flags="-c 2"
-fcgiwrap_profile="nginx"
-fcgiwrap_nginx_socket="unix:/var/run/fcgiwrap.nginx.socket"
+fcgiwrap_profiles="nginx"
+fcgiwrap_nginx_socket="unix:/var/run/fcgiwrap/fcgiwrap.nginx.socket"
 fcgiwrap_nginx_user="git_daemon"
 ```
 
@@ -54,7 +54,7 @@ server {
     fastcgi_param SCRIPT_FILENAME /usr/local/libexec/git-core/git-http-backend;
     fastcgi_param GIT_PROJECT_ROOT /home/git;
     fastcgi_param GIT_HTTP_EXPORT_ALL "";
-    fastcgi_pass unix:/var/run/fcgiwrap.nginx.socket;
+    fastcgi_pass unix:/var/run/fcgiwrap/fcgiwrap.nginx.socket;
   }
 }
 ```
@@ -78,7 +78,7 @@ On the server, run:
 
 ```
 $ cd $git_repo_root
-$ htpasswd -cs htpasswd $user_name
+$ sudo htpasswd -cs htpasswd $user_name
 $ sudo -u git_daemon git init --bare --shared=group test.git
 $ cd test.git
 $ sudo -u git_daemon git update-server-info
