@@ -58,6 +58,26 @@ $ service nginx restart
 ```
 
 
+## Redirecting HTTP requests
+
+```
+http {
+  ...
+
+  server {
+    ...
+
+    listen 80;
+    return 301 https://$host$request_uri;
+
+    ...
+  }
+
+  ...
+}
+```
+
+
 ## References
 
 - [Certbot.org](https://certbot.eff.org/#freebsd-nginx)
