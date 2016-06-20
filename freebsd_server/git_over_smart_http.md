@@ -54,6 +54,8 @@ server {
     fastcgi_param SCRIPT_FILENAME /usr/local/libexec/git-core/git-http-backend;
     fastcgi_param GIT_PROJECT_ROOT /home/git;
     fastcgi_param GIT_HTTP_EXPORT_ALL "";
+    fastcgi_param PATH_INFO $uri;
+    fastcgi_param REMOTE_USER $remote_user; # Is this necessary?
     fastcgi_pass unix:/var/run/fcgiwrap/fcgiwrap.nginx.socket;
   }
 }
