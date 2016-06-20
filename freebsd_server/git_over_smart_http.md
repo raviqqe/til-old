@@ -135,3 +135,5 @@ WIP
 
 - [an article on qiita](http://qiita.com/egnr-in-6matroom/items/2a052339ee0515b31fdf)
 - [an article on hatena](http://d.hatena.ne.jp/ono51/touch/20120619/p1)
+- [Re: Conditional http auth](https://forum.nginx.org/read.php?2,155385,155391#msg-155391)
+- [Module ngx_http_core_module](http://nginx.org/en/docs/http/ngx_http_core_module.html)
