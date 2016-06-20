@@ -100,12 +100,33 @@ $ git push
 ```
 
 
+## Anonymous read and authenticated write
+
+```
+server {
+
+  ...
+
+  location / {
+    set $realm "Restricted";
+
+    if ( $arg_service ~ git-upload-pack ) {
+      set $realm off;
+    }
+
+    if ( $uri ~ /git-upload-pack$ ) {
+      set $realm off;
+    }
+
+    auth_basic $realm;
+    auth_basic_user_file htpasswd;
+
+    ...
+  }
+}
+```
+
 ## Redirecting repository names without `.git` extensions
-
-WIP
-
-
-## Using virtual hosts
 
 WIP
 
