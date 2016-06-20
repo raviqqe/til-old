@@ -48,7 +48,7 @@ server {
 
   location / {
     auth_basic "Restricted";
-    auth_basic_user_file htpasswd;
+    auth_basic_user_file htpasswd; # /usr/local/etc/nginx/htpasswd in my case
 
     include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME /usr/local/libexec/git-core/git-http-backend;
