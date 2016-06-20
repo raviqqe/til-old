@@ -79,6 +79,13 @@ $ git remote prune $remote
 ```
 
 
+## Enabling credential storage for HTTPS
+
+```
+$ git config --global credential.helper cache
+```
+
+
 ## References
 
 - [How do I remove a submodule?](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule)
