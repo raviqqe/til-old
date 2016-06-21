@@ -82,10 +82,6 @@ On the server, run:
 $ cd $git_repo_root
 $ sudo htpasswd -cs htpasswd $user_name
 $ sudo -u git_daemon git init --bare --shared=group test.git
-$ cd test.git
-$ sudo -u git_daemon git update-server-info
-$ sudo -u git_daemon git config http.receivepack true
-$ sudo -u git_daemon cp hooks/post-update.sample hooks/post-update
 ```
 
 On clients, run:
@@ -100,12 +96,33 @@ $ git push
 ```
 
 
+## Anonymous read and authenticated write
+
+```
+server {
+
+  ...
+
+  location / {
+    set $realm "Restricted";
+
+    if ( $arg_service ~ git-upload-pack ) {
+      set $realm off;
+    }
+
+    if ( $uri ~ /git-upload-pack$ ) {
+      set $realm off;
+    }
+
+    auth_basic $realm;
+    auth_basic_user_file htpasswd;
+
+    ...
+  }
+}
+```
+
 ## Redirecting repository names without `.git` extensions
-
-WIP
-
-
-## Using virtual hosts
 
 WIP
 
@@ -114,3 +131,5 @@ WIP
 
 - [an article on qiita](http://qiita.com/egnr-in-6matroom/items/2a052339ee0515b31fdf)
 - [an article on hatena](http://d.hatena.ne.jp/ono51/touch/20120619/p1)
+- [Re: Conditional http auth](https://forum.nginx.org/read.php?2,155385,155391#msg-155391)
+- [Module ngx_http_core_module](http://nginx.org/en/docs/http/ngx_http_core_module.html)
