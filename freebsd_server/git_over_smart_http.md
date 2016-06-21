@@ -82,10 +82,6 @@ On the server, run:
 $ cd $git_repo_root
 $ sudo htpasswd -cs htpasswd $user_name
 $ sudo -u git_daemon git init --bare --shared=group test.git
-$ cd test.git
-$ sudo -u git_daemon git update-server-info
-$ sudo -u git_daemon git config http.receivepack true
-$ sudo -u git_daemon cp hooks/post-update.sample hooks/post-update
 ```
 
 On clients, run:
