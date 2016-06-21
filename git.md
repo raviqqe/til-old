@@ -85,6 +85,22 @@ $ git remote prune $remote
 $ git config --global credential.helper cache
 ```
 
+## Sharing repositories by UNIX group
+
+Create repositories with the `--shared=group` option.
+
+```
+$ git init --bare --shared=group repo.git
+```
+
+To share existing repositories, run:
+
+```
+$ git -C $repo_dir config core.sharedRepository group
+$ chmod -R g+rw $repo_dir
+$ chmod g+s $(find $repo_dir -type d)
+```
+
 
 ## References
 
