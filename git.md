@@ -105,3 +105,5 @@ $ chmod g+s $(find $repo_dir -type d)
 ## References
 
 - [How do I remove a submodule?](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule)
+- [How to configure an existing git repo to be shared by a UNIX group](http://stackoverflow.com/questions/3242282/how-to-configure-an-existing-git-repo-to-be-shared-by-a-unix-group)
+- [git: リポジトリを後から共有できるようにする](http://d.hatena.ne.jp/kuma8/20110115/1295100616)
