@@ -122,6 +122,26 @@ server {
 }
 ```
 
+
+## HTTP 413: request entity too large
+
+Increase the limit of client request body size.
+
+```
+http {
+  ...
+
+  server {
+    client_max_body_size 256M; # set 0 to unlimit it
+
+    ...
+  }
+
+  ...
+}
+```
+
+
 ## Redirecting repository names without `.git` extensions
 
 WIP
