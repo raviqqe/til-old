@@ -79,6 +79,13 @@ $ git remote prune $remote
 ```
 
 
+## Moving submodules
+
+```
+$ git mv $old_path_to_submodule $new_path_to_submodule
+```
+
+
 ## Enabling credential storage for HTTPS
 
 ```
