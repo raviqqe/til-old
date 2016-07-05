@@ -16,3 +16,17 @@ task :baz => :bar do
   puts "baz"
 end
 ```
+
+
+## Overwriting tasks
+
+```
+task :foo do
+  puts "foo"
+end
+
+Rake::Task[:foo].clear
+task :foo do
+  puts "bar"
+end
+```
