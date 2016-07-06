@@ -30,3 +30,14 @@ task :foo do
   puts "bar"
 end
 ```
+
+
+## Cleaning chains
+
+```
+%i(clean clobber).each do |task_name|
+  Rake::Task[task_name].enhance do
+    sh %(cd #{SUB_RAKE_DIR} && rake #{task_name})
+  end
+end
+```
