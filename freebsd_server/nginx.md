@@ -38,3 +38,12 @@ http {
   }
 }
 ```
+
+
+## Building with `libressl`
+
+Edit `/etc/make.conf`.
+
+```
+DEFAULT_VERSIONS += ssl=libressl
+```
