@@ -129,6 +129,29 @@ $ docker login --username=$user_name --email=$email_address
 $ docker push $repo_name/$image_name
 ```
 
+## Saving and loading images from and to tarballs
+
+```
+$ docker save $image > foo.tar
+```
+
+`load` command extracts tag names in addition to images themselves.
+
+```
+$ docker load < foo.tar
+```
+
+## Moving docker directory (on Fedora 23)
+
+```
+$ systemctl stop docker.service
+$ mv /var/lib/docker /home/docker # old to new
+$ vi /etc/sysconfig/docker
+$ grep OPTIONS /etc/sysconfig/docker
+OPTIONS='--selinux-enabled --log-driver=journald -g /home/docker'
+$ systemctl start docker.service
+```
+
 
 ## Troubleshooting
 
@@ -144,3 +167,4 @@ On Fedora 23, it is at `/var/lib/docker`.
 ## References
 
 - [Remove untagged images from Docker](http://jimhoskins.com/2013/07/27/remove-untagged-docker-images.html)
+- [dockerで、pathの場所を、/var/lib/dockerから/mnt/foobar/に変更する方法 (Fedora版)](http://qiita.com/cat-in-136/items/f358a1bd08ae4b037ea1)
