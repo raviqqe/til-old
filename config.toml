@@ -1,4 +1,4 @@
-title = "raviqqe.com"
+title = "raviqqe's notes"
 css = ["/style.css"]
 copyright = "/copy.html"
 valid_extensions = [".c", ".h", ".py", ".png", ".jpeg", ".jpg", ".svg"]

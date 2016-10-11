@@ -29,6 +29,12 @@ To install a package,
 $ brew install $package_name
 ```
 
+To see a list of options for a package,
+
+```
+$ brew info $package_name
+```
+
 To upgrade a package,
 
 ```

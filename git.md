@@ -79,13 +79,38 @@ $ git remote prune $remote
 ```
 
 
+## Moving submodules
+
+```
+$ git mv $old_path_to_submodule $new_path_to_submodule
+```
+
+
 ## Enabling credential storage for HTTPS
 
 ```
 $ git config --global credential.helper cache
 ```
 
+## Sharing repositories by UNIX group
+
+Create repositories with the `--shared=group` option.
+
+```
+$ git init --bare --shared=group repo.git
+```
+
+To share existing repositories, run:
+
+```
+$ git -C $repo_dir config core.sharedRepository group
+$ chmod -R g+rw $repo_dir
+$ chmod g+s $(find $repo_dir -type d)
+```
+
 
 ## References
 
 - [How do I remove a submodule?](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule)
+- [How to configure an existing git repo to be shared by a UNIX group](http://stackoverflow.com/questions/3242282/how-to-configure-an-existing-git-repo-to-be-shared-by-a-unix-group)
+- [git: リポジトリを後から共有できるようにする](http://d.hatena.ne.jp/kuma8/20110115/1295100616)
