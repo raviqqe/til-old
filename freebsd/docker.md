@@ -28,7 +28,7 @@ $ service docker start
 ## FreeBSD image
 
 No official image of FreeBSD exists as of October 15, 2016.
-You can build [mine](https://github.com/raviqqe/freebsd-docker-image).
+You can use [the image by Akihiro Uchida](https://hub.docker.com/r/auchida/freebsd/).
 
 
 ## References
