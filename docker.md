@@ -163,6 +163,28 @@ On Fedora 23, it is at `/var/lib/docker`.
 (Is this the best way to deal with it?)
 
 
+### Writing to /etc/resolv.conf
+
+The current version of Docker (October 15, 2016) doesn't allow modifying
+`/etc/resolv.conf` in `Dockerfile`.
+Even if you do so, it is made empty in each build step.
+
+So, you cannot do this:
+
+```
+RUN echo nameserver 8.8.8.8 > /etc/resolv.conf
+RUN some_command # using /etc/resolv.conf
+```
+
+Therefore, do this instead:
+
+```
+RUN echo nameserver 8.8.8.8 > /etc/resolv.conf && \
+    some_command # using /etc/resolv.conf
+```
+
+There are [some discussions](https://github.com/docker/docker/issues/2267).
+
 
 ## References
 
