@@ -50,3 +50,13 @@ try this command which updates the repositories' metadata forcibly.
 ```
 $ pkg update -f
 ```
+
+## Showing installation message
+
+```
+$ pkg info -D $package
+```
+
+## References
+
+- [how to display pkg-message](https://lists.freebsd.org/pipermail/freebsd-questions/2009-September/204877.html)
