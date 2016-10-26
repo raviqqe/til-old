@@ -1,3 +1,3 @@
-# raviqqe.com
+# raviqqe's notes
 
-freebsd, linux and so on
+FreeBSD, Linux, Docker, and more!
