@@ -46,7 +46,8 @@ rule '.html' => '.md' do |t|
     html do
       head do
         title "raviqqe's notes"
-        link rel: 'stylesheet', href: 'https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css'
+        # link rel: 'stylesheet', href: 'https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css'
+        link rel: 'stylesheet', href: '/style.css'
         link href: '/favicon.ico', type: 'image/x-icon', rel: 'shortcut icon'
         link href: '/favicon.ico', type: 'image/x-icon', rel: 'icon'
         link href: '/apple-touch-icon.png', type: 'image/png', \
