@@ -25,7 +25,9 @@ rule '.html' => '.md' do |t|
     html do
       head do
         title "raviqqe's notes"
-        link rel: 'stylesheet', href: '/style.css'
+        link rel: 'stylesheet', href: 'https://raw.githubusercontent.com/hzlzh/MarkDown-Theme/master/CSS/GitHub-ReadMe.css'
+        link rel: 'shortcut icon', href: '/favicon.ico', type: 'image/x-icon'
+        link rel: 'icon', href: '/apple-touch-icon.png', type: 'image/x-icon'
       end
 
       body do
