@@ -46,16 +46,16 @@ rule '.html' => '.md' do |t|
     html do
       head do
         title "raviqqe's notes"
-        # link rel: 'stylesheet', href: 'https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css'
-        link rel: 'stylesheet', href: '/style.css'
+        link rel: 'stylesheet', type: 'text/css', href: 'https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css'
+        # link rel: 'stylesheet', type: 'text/css', href: '/style.css'
         link href: '/favicon.ico', type: 'image/x-icon', rel: 'shortcut icon'
         link href: '/favicon.ico', type: 'image/x-icon', rel: 'icon'
         link href: '/apple-touch-icon.png', type: 'image/png', \
              rel: 'apple-touch-icon'
         meta name: 'viewport', content: 'width=device-width'
+        script src: "#{base_dir}/highlight.min.js"
         base_dir = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0'
         link rel: 'stylesheet', href: "#{base_dir}/styles/default.min.css"
-        script src: "#{base_dir}/highlight.min.js"
         script 'hljs.initHighlightingOnLoad();'
       end
 
