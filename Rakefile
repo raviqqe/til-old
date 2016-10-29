@@ -46,7 +46,7 @@ rule '.html' => '.md' do |t|
     html do
       head do
         title "raviqqe's notes"
-        link rel: 'stylesheet', href: 'https://raw.githubusercontent.com/hzlzh/MarkDown-Theme/master/CSS/GitHub-ReadMe.css'
+        link rel: 'stylesheet', href: 'https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css'
         link href: '/favicon.ico', type: 'image/x-icon', rel: 'shortcut icon'
         link href: '/favicon.ico', type: 'image/x-icon', rel: 'icon'
         link href: '/apple-touch-icon.png', type: 'image/png', \
@@ -57,7 +57,7 @@ rule '.html' => '.md' do |t|
         script 'hljs.initHighlightingOnLoad();'
       end
 
-      body do
+      body class: 'markdown-body' do
         div do
           p_ do
             a 'back', href: '..'
