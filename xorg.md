@@ -1,15 +1,22 @@
-# X.org server
+# X server
+
+## Killing X server on Fedora 23 (systemd based)
+
+```
+$ init 3
+```
+
 
 ## Listing fonts
 
 ```
-$ xlsfonts
+$ xlsfonts [-fn <XLFD pattern>]
 ```
 
 or
 
 ```
-$ fc-list
+$ fc-list [<pattern>]
 ```
 
 The former is for [XLFD](https://en.wikipedia.org/wiki/X_logical_font_description)
