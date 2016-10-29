@@ -15,7 +15,7 @@ def block_is_html &block
     x.is_a?(Symbol) ? x.to_s.gsub(/_*$/, '').to_sym : x
   end
 
-  XML::from_array array
+  XML::from_array array, format: false
 end
 
 
