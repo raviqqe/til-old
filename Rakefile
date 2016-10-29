@@ -84,7 +84,7 @@ end
 
 
 file 'style.css' do |t|
-  `curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css > #{t.name}`
+  sh "curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css > #{t.name}"
 end
 
 
