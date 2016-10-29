@@ -19,6 +19,28 @@ def block_is_html &block
 end
 
 
+def file_page markdown
+  markdown_to_html markdown
+end
+
+
+def dir_page markdown, filename
+  Dir.chdir File.dirname(filename) do
+    toc = Dir.entries('.').select do |path|
+      path !~ /^\.+$/
+    end.map do |path|
+      File.directory?(path) ? File.join(path, 'index.md') : path
+    end.select do |path|
+      File.exist?(path) and path =~ /\.md$/
+    end.map do |path|
+      "- [#{File.open(path).to_a[0].sub(/^# */, '').strip}](#{path.ext '.html'})"
+    end.join "\n"
+
+    markdown_to_html(markdown + "\n" + toc)
+  end
+end
+
+
 rule '.html' => '.md' do |t|
   str = block_is_html do
     html do
@@ -42,7 +64,9 @@ rule '.html' => '.md' do |t|
           end
         end
         hr
-        div markdown_to_html(File.read t.source)
+        markdown = File.read t.source
+        div(t.source =~ /\/index.md$/ ? dir_page(markdown, t.source)
+                                      : file_page(markdown))
         hr
         div markdown_to_html("
           To the extent possible under law, the person who associated
