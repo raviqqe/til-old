@@ -26,8 +26,14 @@ rule '.html' => '.md' do |t|
       head do
         title "raviqqe's notes"
         link rel: 'stylesheet', href: 'https://raw.githubusercontent.com/hzlzh/MarkDown-Theme/master/CSS/GitHub-ReadMe.css'
-        link rel: 'shortcut icon', href: '/favicon.ico', type: 'image/x-icon'
-        link rel: 'icon', href: '/apple-touch-icon.png', type: 'image/x-icon'
+        link href: '/favicon.ico', type: 'image/x-icon', rel: 'shortcut icon'
+        link href: '/favicon.ico', type: 'image/x-icon', rel: 'icon'
+        link href: '/apple-touch-icon.png', type: 'image/png', \
+             rel: 'apple-touch-icon'
+        base_dir = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0'
+        link rel: 'stylesheet', href: "#{base_dir}/styles/default.min.css"
+        script src: "#{base_dir}/highlight.min.js"
+        script 'hljs.initHighlightingOnLoad();'
       end
 
       body do
