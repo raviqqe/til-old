@@ -1,8 +1,7 @@
-require 'xml-dsl'
 require 'map-rec'
 require 'rake/clean'
 require 'redcarpet'
-require 'rails'
+require 'xml-dsl'
 
 
 
@@ -37,7 +36,11 @@ rule '.html' => '.md' do |t|
       end
 
       body do
-        p_
+        div do
+          p_ do
+            a 'back', href: '..'
+          end
+        end
         hr
         div markdown_to_html(File.read t.source)
         hr
