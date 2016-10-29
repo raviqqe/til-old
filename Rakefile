@@ -34,7 +34,7 @@ def dir_page markdown, filename
       File.exist?(path) and path =~ /\.md$/
     end.map do |path|
       "- [#{File.open(path).to_a[0].sub(/^# */, '').strip}](#{path.ext '.html'})"
-    end.join "\n"
+    end.sort.join "\n"
 
     markdown_to_html(markdown + "\n" + toc)
   end
