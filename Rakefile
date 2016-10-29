@@ -80,7 +80,7 @@ rule '.html' => '.md' do |t|
     end
   end
 
-  File.write t.name, '<!DOCTYPE xhtml>' + str
+  File.write t.name, str
 end
 
 
