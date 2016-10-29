@@ -65,8 +65,8 @@ rule '.html' => '.md' do |t|
         end
         hr
         markdown = File.read t.source
-        div(t.source =~ /\/index.md$/ ? dir_page(markdown, t.source)
-                                      : file_page(markdown))
+        div(t.source =~ /(^|\/)index.md$/ ? dir_page(markdown, t.source)
+                                          : file_page(markdown))
         hr
         div markdown_to_html("
           To the extent possible under law, the person who associated
