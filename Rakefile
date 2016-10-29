@@ -84,7 +84,7 @@ end
 
 
 file 'style.css' do |t|
-  sh "wget -o #{t.name} https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css"
+  `curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css > #{t.name}`
 end
 
 
