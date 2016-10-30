@@ -56,7 +56,9 @@ rule '.html' => '.md' do |t|
   str = block_is_html do
     html do
       head do
-        title "raviqqe's notes"
+        title_name = "raviqqe's notes"
+        title(t.source =~ /^(|\/|\.\/)index\.md$/ ? \
+              title_name : get_title(t.source) + " | " + title_name)
         link rel: 'stylesheet', type: 'text/css', href: '/style.css'
         link href: '/favicon.ico', type: 'image/x-icon', rel: 'shortcut icon'
         link href: '/favicon.ico', type: 'image/x-icon', rel: 'icon'
