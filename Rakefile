@@ -24,16 +24,27 @@ def file_page markdown
 end
 
 
+def get_title path
+  path = dir_to_index(path) if File.directory?(path)
+  File.open(path).to_a[0].sub(/^# */, '').strip
+end
+
+
+def dir_to_index path
+  File.join path, 'index.md'
+end
+
+
 def dir_page markdown, filename
   Dir.chdir File.dirname(filename) do
     toc = Dir.entries('.').select do |path|
       path !~ /^\.+$/ and path !~ /index\.md$/
     end.map do |path|
-      File.directory?(path) ? File.join(path, 'index.md') : path
+      File.directory?(path) ? dir_to_index(path) : path
     end.select do |path|
       File.exist?(path) and path =~ /\.md$/
     end.map do |path|
-      "- [#{File.open(path).to_a[0].sub(/^# */, '').strip}](#{path.ext '.html'})"
+      "- [#{get_title(path)}](#{path.ext '.html'})"
     end.sort_by(&:downcase).join "\n"
 
     markdown_to_html(markdown + "\n" + toc)
