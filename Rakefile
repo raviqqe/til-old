@@ -70,13 +70,19 @@ rule '.html' => '.md' do |t|
         script src: "#{base_dir}/highlight.min.js"
         script 'hljs.initHighlightingOnLoad();'
 
-        style %(body {
-          box-sizing: border-box;
-          min-width: 200px;
-          max-width: 980px;
-          margin: 0 auto;
-          padding: 45px;
-        })
+        style %(
+          body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+          }
+
+          @media only screen and (max-width: 480px) {
+            body { padding: 1ex }
+          }
+        )
       end
 
       body class: 'markdown-body' do
