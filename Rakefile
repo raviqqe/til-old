@@ -80,7 +80,7 @@ rule '.html' => '.md' do |t|
           }
 
           @media only screen and (max-width: 480px) {
-            body { padding: 2ex }
+            body { padding: 1.5ex }
           }
         )
       end
