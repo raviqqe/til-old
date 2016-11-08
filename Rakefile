@@ -40,6 +40,11 @@ def is_index_md path
 end
 
 
+def is_top_index_md path
+  path == 'index.md'
+end
+
+
 def dir_page markdown, filename
   Dir.chdir File.dirname(filename) do
     toc = Dir.entries('.').select do |path|
@@ -63,7 +68,7 @@ rule '.html' => '.md' do |t|
     html do
       head do
         title_name = "raviqqe's notes"
-        title(t.source =~ /^(|\/|\.\/)index\.md$/ ? \
+        title(is_top_index_md(t.source) ? \
               title_name : get_title(t.source) + " | " + title_name)
         link rel: 'stylesheet', type: 'text/css', href: '/style.css'
         link href: '/favicon.ico', type: 'image/x-icon', rel: 'shortcut icon'
@@ -100,15 +105,15 @@ rule '.html' => '.md' do |t|
           p_ do
             a 'top', href: '/', class: 'button'
             a('back',
-              href: (t.source =~ /(^|\/)index\.md$/ ? '..' : '.'),
+              href: (is_index_md(t.source) ? '..' : '.'),
               class: 'button') \
-              unless t.source == 'index.md'
+              unless is_top_index_md(t.source)
           end
         end
         hr
         markdown = File.read t.source
-        div(t.source =~ /(^|\/)index\.md$/ ? dir_page(markdown, t.source)
-                                           : file_page(markdown))
+        div(is_index_md(t.source) ? dir_page(markdown, t.source)
+                                  : file_page(markdown))
 
         hr
 
