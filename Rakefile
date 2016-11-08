@@ -126,11 +126,11 @@ rule '.html' => '.md' do |t|
                 unless is_top_index_md(t.source)
           end
         end
+
         hr
         markdown = File.read t.source
         div((is_index_md(t.source) and not in_history_dir(t.source)) ?
             dir_page(markdown, t.source) : file_page(markdown))
-
         hr
 
         unless in_history_dir(t.source)
