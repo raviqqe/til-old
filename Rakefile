@@ -35,16 +35,22 @@ def dir_to_index path
 end
 
 
+def is_index_md path
+  path =~ /(^|\/)index\.md$/
+end
+
+
 def dir_page markdown, filename
   Dir.chdir File.dirname(filename) do
     toc = Dir.entries('.').select do |path|
-      path !~ /^\.+$/ and path !~ /index\.md$/ and path !~ /\.history\.md$/
+      path !~ /^\.+$/ and not is_index_md(path) and path !~ /\.history\.md$/
     end.map do |path|
       File.directory?(path) ? dir_to_index(path) : path
     end.select do |path|
       File.exist?(path) and path =~ /\.md$/
     end.map do |path|
-      "- [#{get_title(path)}](#{path.ext '.html'})"
+      link = is_index_md(path) ? File.dirname(path) : path.ext('.html')
+      "- [#{get_title(path)}](#{link})"
     end.sort_by(&:downcase).join "\n"
 
     markdown_to_html(markdown + "\n" + toc)
