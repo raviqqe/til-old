@@ -127,9 +127,10 @@ rule '.html' => '.md' do |t|
                 a 'History', href: File.basename(md_history_file.ext 'html')
               end
 
-              history = `#{history_command}`.gsub '```', '\\`\\`\\`'
+              backticks = '``````````````````````````````````'
               File.write(md_history_file,
-                        "# History of #{t.source}\n\n```\n#{history}```")
+                         "# History of #{t.source}\n\n#{backticks}\n\
+                          #{`#{history_command}`}#{backticks}")
 
               Rake::Task[md_history_file.ext 'html'].invoke
             end
