@@ -38,7 +38,7 @@ end
 def dir_page markdown, filename
   Dir.chdir File.dirname(filename) do
     toc = Dir.entries('.').select do |path|
-      path !~ /^\.+$/ and path !~ /index\.md$/
+      path !~ /^\.+$/ and path !~ /index\.md$/ and path !~ /\.history\.md$/
     end.map do |path|
       File.directory?(path) ? dir_to_index(path) : path
     end.select do |path|
