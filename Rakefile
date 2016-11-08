@@ -72,7 +72,7 @@ end
 
 rule '.html' => '.md' do |t|
   unless in_history_dir(t.source)
-    history_command = "git log -p #{t.source}"
+    history_command = "git log --date='format:%A, %B %d, %Y' -p #{t.source}"
     dates = `#{history_command} | grep Date:`.split("\n")
     history_dir = File.join File.dirname(t.source), HISTORY_DIR
     md_history_file = File.join history_dir, File.basename(t.source)
