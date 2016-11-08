@@ -85,6 +85,10 @@ rule '.html' => '.md' do |t|
             padding: 45px;
           }
 
+          .button {
+            margin-right: 2em;
+          }
+
           @media only screen and (max-width: 480px) {
             body { padding: 1.5ex }
           }
@@ -94,10 +98,11 @@ rule '.html' => '.md' do |t|
       body class: 'markdown-body' do
         div do
           p_ do
-            a 'top', href: '/'
-            span ' '
-            a 'back', href: (t.source =~ /(^|\/)index\.md$/ ? '..' : '.') \
-                unless t.source == 'index.md'
+            a 'top', href: '/', class: 'button'
+            a('back',
+              href: (t.source =~ /(^|\/)index\.md$/ ? '..' : '.'),
+              class: 'button') \
+              unless t.source == 'index.md'
           end
         end
         hr
