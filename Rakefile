@@ -32,7 +32,7 @@ end
 
 def md_file_to_link path
   link = is_index_md(path) ? File.dirname(path) : path.ext('html')
-  "[#{get_title(path)}](#{link})"
+  "<a href=\"#{link}\">#{get_title(path)}</a>"
 end
 
 
@@ -164,7 +164,7 @@ rule '.html' => '.md' do |t|
                 next if files.empty?
 
                 li "#{date.gsub(/Date: */, '')}: #{comment} "\
-                   "(#{markdown_to_html(md_files_to_links(files).join(', '))})"
+                   "(#{md_files_to_links(files).join(', ')})"
               end
             end
           end
