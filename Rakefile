@@ -161,9 +161,10 @@ rule '.html' => '.md' do |t|
                 files = lines[2..-1]
                 next unless files
                 files = files.select { |file| File.exist? file }
+                next if files.empty?
 
                 li "#{date.gsub(/Date: */, '')}: #{comment} "\
-                   "(#{md_files_to_links(files).join(', ')})"
+                   "(#{markdown_to_html(md_files_to_links(files).join(', '))})"
               end
             end
           end
