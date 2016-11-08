@@ -89,6 +89,7 @@ rule '.html' => '.md' do |t|
         div do
           p_ do
             a 'top', href: '/'
+            span ' '
             a 'back', href: (t.source =~ /(^|\/)index\.md$/ ? '..' : '.') \
                 unless t.source == 'index.md'
           end
