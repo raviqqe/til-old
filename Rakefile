@@ -147,6 +147,8 @@ rule '.html' => '.md' do |t|
 
         if is_top_index_md(t.source)
           div do
+            h2 'Change log'
+
             `#{GIT_LOG} --name-only -p '*.md'`.split('commit').select do |s|
               not s.include? 'Merge'
             end.each do |chunk|
@@ -156,8 +158,9 @@ rule '.html' => '.md' do |t|
               files = lines[2..-1]
               next unless files
               files = files.select { |file| File.exist? file }
-              div markdown_to_html(date.gsub(/Date: */, '') + ': ' + comment +
-                                   "\n\n" + md_files_to_links(files))
+
+              h4(date.gsub(/Date: */, '') + ': ' + comment)
+              div markdown_to_html(md_files_to_links(files))
             end
           end
         end
