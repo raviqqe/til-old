@@ -129,8 +129,8 @@ rule '.html' => '.md' do |t|
 
               backticks = '``````````````````````````````````'
               File.write(md_history_file,
-                         "# History of #{t.source}\n\n#{backticks}\n\
-                          #{`#{history_command}`}#{backticks}")
+                         "# History of #{t.source}\n\n"\
+                         "#{backticks}\n#{`#{history_command}`}#{backticks}")
 
               Rake::Task[md_history_file.ext 'html'].invoke
             end
