@@ -97,6 +97,30 @@ rule '.html' => '.md' do |t|
         markdown = File.read t.source
         div(t.source =~ /(^|\/)index\.md$/ ? dir_page(markdown, t.source)
                                            : file_page(markdown))
+
+        if t.source !~ /\.history/
+          hr
+          p_ do
+            history_command = "git log -p #{t.source}"
+            dates = `#{history_command} | grep Date:`.split("\n")
+
+            span(dates[0].sub('Date', 'Last modified') + ', ')
+            span(dates[-1].sub('Date', 'Created') + ', ')
+
+            md_history_file = t.source.ext('history.md')
+
+            span do
+              a 'History', href: md_history_file.ext('html')
+            end
+
+            File.write(
+                md_history_file,
+                "# History of #{t.source}\n\n```\n#{`#{history_command}`}```")
+
+            Rake::Task[md_history_file.ext 'html'].invoke
+          end
+        end
+
         hr
         div markdown_to_html("
           To the extent possible under law, the person who associated
@@ -121,4 +145,4 @@ task :default => Dir.glob('**/*.md').map{ |filename| filename.ext '.html' } \
                  .push('style.css')
 
 
-CLEAN.include Dir.glob('**/*.html')
+CLEAN.include Dir.glob(['**/*.html', '**/*.history.md'])
