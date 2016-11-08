@@ -126,7 +126,7 @@ rule '.html' => '.md' do |t|
               span(dates[0].sub('Date', 'Last modified') + ', ')
               span(dates[-1].sub('Date', 'Created') + ', ')
 
-              md_history_file = t.source.ext('history.md')
+              md_history_file = t.source.ext 'history.md'
 
               span do
                 a 'History', href: File.basename(md_history_file.ext 'html')
