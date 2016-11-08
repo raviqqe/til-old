@@ -30,6 +30,19 @@ def get_title path
 end
 
 
+def md_file_to_link path
+  link = is_index_md(path) ? File.dirname(path) : path.ext('html')
+  "<a href=\"#{link}\">#{get_title(path)}</a>"
+end
+
+
+def md_files_to_links paths
+  paths.map do |path|
+    md_file_to_link path
+  end.sort_by(&:downcase)
+end
+
+
 def dir_to_index path
   File.join path, 'index.md'
 end
@@ -47,18 +60,17 @@ end
 
 def dir_page markdown, filename
   Dir.chdir File.dirname(filename) do
-    toc = Dir.entries('.').select do |path|
+    md_files = Dir.entries('.').select do |path|
       path !~ /^\.+$/ and not is_index_md(path) and path !~ /\.history\.md$/
     end.map do |path|
       File.directory?(path) ? dir_to_index(path) : path
     end.select do |path|
       File.exist?(path) and path =~ /\.md$/
-    end.map do |path|
-      link = is_index_md(path) ? File.dirname(path) : path.ext('.html')
-      "- [#{get_title(path)}](#{link})"
-    end.sort_by(&:downcase).join "\n"
+    end
 
-    markdown_to_html(markdown + "\n" + toc)
+    markdown_to_html(markdown + "\n" +
+                     md_files_to_links(md_files)
+                     .map{ |link| '- ' + link }.join("\n"))
   end
 end
 
@@ -70,9 +82,11 @@ def in_history_dir path
 end
 
 
+GIT_LOG = "git log --date='format:%A, %B %d, %Y'"
+
 rule '.html' => '.md' do |t|
   unless in_history_dir(t.source)
-    history_command = "git log --date='format:%A, %B %d, %Y' -p #{t.source}"
+    history_command = "#{GIT_LOG} -p #{t.source}"
     dates = `#{history_command} | grep Date:`.split("\n")
     history_dir = File.join File.dirname(t.source), HISTORY_DIR
     md_history_file = File.join history_dir, File.basename(t.source)
@@ -108,6 +122,10 @@ rule '.html' => '.md' do |t|
             margin-right: 1em;
           }
 
+          .date {
+            margin-right: 0.5em;
+          }
+
           @media only screen and (max-width: 480px) {
             body { padding: 1.5ex }
           }
@@ -118,24 +136,47 @@ rule '.html' => '.md' do |t|
         div do
           p_ do
             a 'top', href: '/', class: 'button'
-            a('back',
-              href: (is_index_md(t.source) ? '..' : '.'),
-              class: 'button') \
-              unless is_top_index_md(t.source)
+            a('back', href: (is_index_md(t.source) ? '..' : '.')) \
+                unless is_top_index_md(t.source)
           end
         end
+
         hr
+
         markdown = File.read t.source
         div((is_index_md(t.source) and not in_history_dir(t.source)) ?
             dir_page(markdown, t.source) : file_page(markdown))
+
+        if is_top_index_md(t.source)
+          div do
+            h2 'Change log'
+
+            ul do
+              `#{GIT_LOG} --name-only -p '*.md'`.split('commit').select do |s|
+                not s.include? 'Merge'
+              end.each do |chunk|
+                lines = chunk.split("\n").select{ |s| s.strip != '' }[2..-1]
+                next unless lines
+                date, comment = lines.map { |s| s.strip }
+                files = lines[2..-1]
+                next unless files
+                files = files.select { |file| File.exist? file }
+                next if files.empty?
+
+                li "#{date.gsub(/Date: */, '')}: #{comment} "\
+                   "(#{md_files_to_links(files).join(', ')})"
+              end
+            end
+          end
+        end
 
         hr
 
         unless in_history_dir(t.source)
           div do
             p_ do
-              span(dates[0].sub('Date', 'Last modified') + ', ')
-              span(dates[-1].sub('Date', 'Created') + ', ')
+              span(dates[0].sub('Date', 'Last modified') + ', ', class: 'date')
+              span(dates[-1].sub('Date', 'Created') + ', ', class: 'date')
 
               span do
                 a 'History', href: File.join(HISTORY_DIR,
