@@ -139,7 +139,7 @@ rule '.html' => '.md' do |t|
 
               span do
                 a 'History', href: File.join(HISTORY_DIR,
-                                             md_history_file.ext('html'))
+                                             File.basename(t.name))
               end
             end
           end
