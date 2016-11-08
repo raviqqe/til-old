@@ -104,7 +104,7 @@ rule '.html' => '.md' do |t|
             padding: 45px;
           }
 
-          .button {
+          .right-margin {
             margin-right: 1em;
           }
 
@@ -117,10 +117,10 @@ rule '.html' => '.md' do |t|
       body class: 'markdown-body' do
         div do
           p_ do
-            a 'top', href: '/', class: 'button'
+            a 'top', href: '/', class: 'right-margin'
             a('back',
               href: (is_index_md(t.source) ? '..' : '.'),
-              class: 'button') \
+              class: 'right-margin') \
               unless is_top_index_md(t.source)
           end
         end
@@ -134,8 +134,10 @@ rule '.html' => '.md' do |t|
         unless in_history_dir(t.source)
           div do
             p_ do
-              span(dates[0].sub('Date', 'Last modified') + ', ')
-              span(dates[-1].sub('Date', 'Created') + ', ')
+              span(dates[0].sub('Date', 'Last modified') + ', ',
+                   class: 'right-margin')
+              span(dates[-1].sub('Date', 'Created') + ', ',
+                   class: 'right-margin')
 
               span do
                 a 'History', href: File.join(HISTORY_DIR,
