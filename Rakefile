@@ -104,8 +104,12 @@ rule '.html' => '.md' do |t|
             padding: 45px;
           }
 
-          .right-margin {
+          .button {
             margin-right: 1em;
+          }
+
+          .date {
+            margin-right: 0.5em;
           }
 
           @media only screen and (max-width: 480px) {
@@ -117,11 +121,9 @@ rule '.html' => '.md' do |t|
       body class: 'markdown-body' do
         div do
           p_ do
-            a 'top', href: '/', class: 'right-margin'
-            a('back',
-              href: (is_index_md(t.source) ? '..' : '.'),
-              class: 'right-margin') \
-              unless is_top_index_md(t.source)
+            a 'top', href: '/', class: 'button'
+            a('back', href: (is_index_md(t.source) ? '..' : '.')) \
+                unless is_top_index_md(t.source)
           end
         end
         hr
@@ -134,10 +136,8 @@ rule '.html' => '.md' do |t|
         unless in_history_dir(t.source)
           div do
             p_ do
-              span(dates[0].sub('Date', 'Last modified') + ', ',
-                   class: 'right-margin')
-              span(dates[-1].sub('Date', 'Created') + ', ',
-                   class: 'right-margin')
+              span(dates[0].sub('Date', 'Last modified') + ', ', class: 'date')
+              span(dates[-1].sub('Date', 'Created') + ', ', class: 'date')
 
               span do
                 a 'History', href: File.join(HISTORY_DIR,
