@@ -110,7 +110,7 @@ rule '.html' => '.md' do |t|
             md_history_file = t.source.ext('history.md')
 
             span do
-              a 'History', href: md_history_file.ext('html')
+              a 'History', href: File.basename(md_history_file.ext 'html')
             end
 
             history = `#{history_command}`.gsub '```', '\\`\\`\\`'
