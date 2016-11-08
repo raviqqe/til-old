@@ -98,30 +98,32 @@ rule '.html' => '.md' do |t|
         div(t.source =~ /(^|\/)index\.md$/ ? dir_page(markdown, t.source)
                                            : file_page(markdown))
 
+        hr
+
         if t.source !~ /\.history/
-          hr
-          p_ do
-            history_command = "git log -p #{t.source}"
-            dates = `#{history_command} | grep Date:`.split("\n")
+          div do
+            p_ do
+              history_command = "git log -p #{t.source}"
+              dates = `#{history_command} | grep Date:`.split("\n")
 
-            span(dates[0].sub('Date', 'Last modified') + ', ')
-            span(dates[-1].sub('Date', 'Created') + ', ')
+              span(dates[0].sub('Date', 'Last modified') + ', ')
+              span(dates[-1].sub('Date', 'Created') + ', ')
 
-            md_history_file = t.source.ext('history.md')
+              md_history_file = t.source.ext('history.md')
 
-            span do
-              a 'History', href: File.basename(md_history_file.ext 'html')
+              span do
+                a 'History', href: File.basename(md_history_file.ext 'html')
+              end
+
+              history = `#{history_command}`.gsub '```', '\\`\\`\\`'
+              File.write(md_history_file,
+                        "# History of #{t.source}\n\n```\n#{history}```")
+
+              Rake::Task[md_history_file.ext 'html'].invoke
             end
-
-            history = `#{history_command}`.gsub '```', '\\`\\`\\`'
-            File.write(md_history_file,
-                       "# History of #{t.source}\n\n```\n#{history}```")
-
-            Rake::Task[md_history_file.ext 'html'].invoke
           end
         end
 
-        hr
         div markdown_to_html("
           To the extent possible under law, the person who associated
           [The Unlicense](https://unlicense.org/UNLICENSE) with this work
