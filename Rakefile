@@ -80,9 +80,11 @@ def in_history_dir path
 end
 
 
+GIT_LOG = "git log --date='format:%A, %B %d, %Y'"
+
 rule '.html' => '.md' do |t|
   unless in_history_dir(t.source)
-    history_command = "git log --date='format:%A, %B %d, %Y' -p #{t.source}"
+    history_command = "#{GIT_LOG} -p #{t.source}"
     dates = `#{history_command} | grep Date:`.split("\n")
     history_dir = File.join File.dirname(t.source), HISTORY_DIR
     md_history_file = File.join history_dir, File.basename(t.source)
@@ -145,8 +147,8 @@ rule '.html' => '.md' do |t|
 
         if is_top_index_md(t.source)
           div do
-            `git log --name-only -p '*.md'`.split('commit').select do |chunk|
-              not chunk.include? 'Merge'
+            `#{GIT_LOG} --name-only -p '*.md'`.split('commit').select do |s|
+              not s.include? 'Merge'
             end.each do |chunk|
               lines = chunk.split("\n").select{ |s| s.strip != '' }[2..-1]
               next unless lines
