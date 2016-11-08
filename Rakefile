@@ -30,6 +30,19 @@ def get_title path
 end
 
 
+def md_file_to_link path
+  link = is_index_md(path) ? File.dirname(path) : path.ext('html')
+  "- [#{get_title(path)}](#{link})"
+end
+
+
+def md_files_to_links paths
+  paths.map do |path|
+    md_file_to_link path
+  end.sort_by(&:downcase).join "\n"
+end
+
+
 def dir_to_index path
   File.join path, 'index.md'
 end
@@ -47,18 +60,15 @@ end
 
 def dir_page markdown, filename
   Dir.chdir File.dirname(filename) do
-    toc = Dir.entries('.').select do |path|
+    md_files = Dir.entries('.').select do |path|
       path !~ /^\.+$/ and not is_index_md(path) and path !~ /\.history\.md$/
     end.map do |path|
       File.directory?(path) ? dir_to_index(path) : path
     end.select do |path|
       File.exist?(path) and path =~ /\.md$/
-    end.map do |path|
-      link = is_index_md(path) ? File.dirname(path) : path.ext('.html')
-      "- [#{get_title(path)}](#{link})"
-    end.sort_by(&:downcase).join "\n"
+    end
 
-    markdown_to_html(markdown + "\n" + toc)
+    markdown_to_html(markdown + "\n" + md_files_to_links(md_files))
   end
 end
 
@@ -128,9 +138,26 @@ rule '.html' => '.md' do |t|
         end
 
         hr
+
         markdown = File.read t.source
         div((is_index_md(t.source) and not in_history_dir(t.source)) ?
             dir_page(markdown, t.source) : file_page(markdown))
+
+        if is_top_index_md(t.source)
+          div do
+            `git log --name-only -p '*.md'`.split('commit').each do |chunk|
+              lines = chunk.split("\n").select{ |s| s.strip != '' }[2..-1]
+              next unless lines
+              date, comment = lines.map { |s| s.strip }
+              files = lines[2..-1]
+              next unless files
+              files = files.select { |file| File.exist? file }
+              div markdown_to_html(
+                  [date, comment, md_files_to_links(files)].join("\n\n"))
+            end
+          end
+        end
+
         hr
 
         unless in_history_dir(t.source)
