@@ -32,14 +32,14 @@ end
 
 def md_file_to_link path
   link = is_index_md(path) ? File.dirname(path) : path.ext('html')
-  "- [#{get_title(path)}](#{link})"
+  "[#{get_title(path)}](#{link})"
 end
 
 
 def md_files_to_links paths
   paths.map do |path|
     md_file_to_link path
-  end.sort_by(&:downcase).join "\n"
+  end.sort_by(&:downcase)
 end
 
 
@@ -68,7 +68,9 @@ def dir_page markdown, filename
       File.exist?(path) and path =~ /\.md$/
     end
 
-    markdown_to_html(markdown + "\n" + md_files_to_links(md_files))
+    markdown_to_html(markdown + "\n" +
+                     md_files_to_links(md_files)
+                     .map{ |link| '- ' + link }.join("\n"))
   end
 end
 
@@ -149,18 +151,20 @@ rule '.html' => '.md' do |t|
           div do
             h2 'Change log'
 
-            `#{GIT_LOG} --name-only -p '*.md'`.split('commit').select do |s|
-              not s.include? 'Merge'
-            end.each do |chunk|
-              lines = chunk.split("\n").select{ |s| s.strip != '' }[2..-1]
-              next unless lines
-              date, comment = lines.map { |s| s.strip }
-              files = lines[2..-1]
-              next unless files
-              files = files.select { |file| File.exist? file }
+            ul do
+              `#{GIT_LOG} --name-only -p '*.md'`.split('commit').select do |s|
+                not s.include? 'Merge'
+              end.each do |chunk|
+                lines = chunk.split("\n").select{ |s| s.strip != '' }[2..-1]
+                next unless lines
+                date, comment = lines.map { |s| s.strip }
+                files = lines[2..-1]
+                next unless files
+                files = files.select { |file| File.exist? file }
 
-              h4(date.gsub(/Date: */, '') + ': ' + comment)
-              div markdown_to_html(md_files_to_links(files))
+                li "#{date.gsub(/Date: */, '')}: #{comment} "\
+                   "(#{md_files_to_links(files).join(', ')})"
+              end
             end
           end
         end
