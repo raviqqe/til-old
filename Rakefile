@@ -88,7 +88,9 @@ rule '.html' => '.md' do |t|
       body class: 'markdown-body' do
         div do
           p_ do
-            a 'back', href: (t.source =~ /(^|\/)index\.md$/ ? '..' : '.')
+            a 'top', href: '/'
+            a 'back', href: (t.source =~ /(^|\/)index\.md$/ ? '..' : '.') \
+                unless t.source == 'index.md'
           end
         end
         hr
