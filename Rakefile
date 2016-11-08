@@ -63,7 +63,21 @@ def dir_page markdown, filename
 end
 
 
+HISTORY_DIR = '_history'
+
+def in_history_dir path
+  path =~ /(^|\/)#{HISTORY_DIR}/
+end
+
+
 rule '.html' => '.md' do |t|
+  unless in_history_dir(t.source)
+    history_command = "git log -p #{t.source}"
+    dates = `#{history_command} | grep Date:`.split("\n")
+    history_dir = File.join File.dirname(t.source), HISTORY_DIR
+    md_history_file = File.join history_dir, File.basename(t.source)
+  end
+
   str = block_is_html do
     html do
       head do
@@ -117,28 +131,16 @@ rule '.html' => '.md' do |t|
 
         hr
 
-        if t.source !~ /\.history/
+        unless in_history_dir(t.source)
           div do
             p_ do
-              history_command = "git log -p #{t.source}"
-              dates = `#{history_command} | grep Date:`.split("\n")
-
               span(dates[0].sub('Date', 'Last modified') + ', ')
               span(dates[-1].sub('Date', 'Created') + ', ')
 
-              md_history_file = t.source.ext 'history.md'
-
               span do
-                a 'History', href: File.basename(md_history_file.ext 'html')
+                a 'History', href: File.join(HISTORY_DIR,
+                                             md_history_file.ext('html'))
               end
-
-              history = `#{history_command}`.split("\n") \
-                                            .map{ |s| '    ' + s } \
-                                            .join("\n")
-              File.write(md_history_file,
-                         "# History of #{t.source}\n\n#{history}")
-
-              Rake::Task[md_history_file.ext 'html'].invoke
             end
           end
         end
@@ -151,6 +153,16 @@ rule '.html' => '.md' do |t|
         ".split.join ' ')
       end
     end
+  end
+
+  unless in_history_dir(t.source)
+    history = `#{history_command}`.split("\n") \
+                                  .map{ |s| '    ' + s } \
+                                  .join("\n")
+
+    mkdir history_dir unless Dir.exist? history_dir
+    File.write md_history_file, "# History of #{t.source}\n\n#{history}"
+    Rake::Task[md_history_file.ext 'html'].invoke
   end
 
   File.write t.name, str
@@ -166,4 +178,4 @@ task :default => Dir.glob('**/*.md').map{ |filename| filename.ext '.html' } \
                  .push('style.css')
 
 
-CLEAN.include Dir.glob(['**/*.html', '**/*.history.md'])
+CLEAN.include Dir.glob(['**/*.html', '**/_history'])
