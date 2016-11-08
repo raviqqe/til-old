@@ -145,15 +145,17 @@ rule '.html' => '.md' do |t|
 
         if is_top_index_md(t.source)
           div do
-            `git log --name-only -p '*.md'`.split('commit').each do |chunk|
+            `git log --name-only -p '*.md'`.split('commit').select do |chunk|
+              not chunk.include? 'Merge'
+            end.each do |chunk|
               lines = chunk.split("\n").select{ |s| s.strip != '' }[2..-1]
               next unless lines
               date, comment = lines.map { |s| s.strip }
               files = lines[2..-1]
               next unless files
               files = files.select { |file| File.exist? file }
-              div markdown_to_html(
-                  [date, comment, md_files_to_links(files)].join("\n\n"))
+              div markdown_to_html(date.gsub(/Date: */, '') + ': ' + comment +
+                                   "\n\n" + md_files_to_links(files))
             end
           end
         end
