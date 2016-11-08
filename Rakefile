@@ -86,7 +86,7 @@ rule '.html' => '.md' do |t|
           }
 
           .button {
-            margin-right: 1.5em;
+            margin-right: 1em;
           }
 
           @media only screen and (max-width: 480px) {
