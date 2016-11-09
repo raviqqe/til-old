@@ -210,7 +210,7 @@ rule '.html' => '.md' do |t|
                                   .map{ |s| '    ' + s } \
                                   .join("\n")
 
-    mkdir history_dir unless Dir.exist? history_dir
+    mkdir_p history_dir unless Dir.exist? history_dir
     File.write md_history_file, "# History of #{t.source}\n\n#{history}"
     Rake::Task[md_history_file.ext 'html'].invoke
   end
