@@ -1,4 +1,4 @@
-# Upload your package with PyPI
+# Upload your package to PyPI
 
 The directory structure of your package should be like this.
 How to write `setup.py` is described
@@ -13,7 +13,7 @@ your_package_dir
 Then, register your package.
 
 ```
-$ python setup.py register 
+$ python setup.py register
 ```
 
 Finally, upload it.
