@@ -1,23 +1,24 @@
 # Upload your package to PyPI
 
-The directory structure of your package should be like this.
+A directory structure of your package should be like this.
 How to write `setup.py` is described
 [here](https://packaging.python.org/en/latest/distributing/#setup-py).
 
 ```
 your_package_dir
 `- setup.py
-`- your_package.py
+`- your_module.py
 ```
 
-Then, register your package.
+Then, build and upload it.
 
 ```
-$ python setup.py register
+$ python setup.py sdist bdist_wheel
+$ pip install twine
+$ twine upload dist/*
 ```
 
-Finally, upload it.
 
-```
-$ python setup.py sdist upload
-```
+## References
+
+- [Packaging and Distributing Projects - Packaging User Guide documentation](https://packaging.python.org/distributing/#uploading-your-project-to-pypi)
