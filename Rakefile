@@ -126,6 +126,12 @@ rule '.html' => '.md' do |t|
             margin-right: 0.5em;
           }
 
+          img.logo {
+            height: 1em;
+            margin-right: 0.5em;
+            vertical-align: -0.15em;
+          }
+
           @media only screen and (max-width: 480px) {
             body { padding: 1.5ex }
           }
@@ -144,6 +150,9 @@ rule '.html' => '.md' do |t|
         hr
 
         markdown = File.read t.source
+        markdown = markdown.gsub(
+            /^# /, '# <img src="/icon.svg" alt="logo" class="logo"/>') \
+            if is_top_index_md(t.source)
         div((is_index_md(t.source) and not in_history_dir(t.source)) ?
             dir_page(markdown, t.source) : file_page(markdown))
 
