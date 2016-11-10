@@ -58,10 +58,17 @@ def is_top_index_md path
 end
 
 
+HISTORY_DIR = '_history'
+
+def in_history_dir path
+  path =~ /(^|\/)#{HISTORY_DIR}/
+end
+
+
 def dir_page markdown, filename
   Dir.chdir File.dirname(filename) do
     md_files = Dir.entries('.').select do |path|
-      path !~ /^\.+$/ and not is_index_md(path) and path !~ /\.history\.md$/
+      path !~ /^\.+$/ and not is_index_md(path) and not in_history_dir(path)
     end.map do |path|
       File.directory?(path) ? dir_to_index(path) : path
     end.select do |path|
@@ -72,13 +79,6 @@ def dir_page markdown, filename
                      md_files_to_links(md_files)
                      .map{ |link| '- ' + link }.join("\n"))
   end
-end
-
-
-HISTORY_DIR = '_history'
-
-def in_history_dir path
-  path =~ /(^|\/)#{HISTORY_DIR}/
 end
 
 
