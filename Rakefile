@@ -234,14 +234,24 @@ def svg_icon filename
 end
 
 
+def points *points
+  points.map do |x, y|
+    "#{x},#{y}"
+  end.join ' '
+end
+
+
 ICON_SVG = 'icon.svg'
 
 file ICON_SVG do |t|
+  full = 4242
+  half = full / 2
+
   source = xml do
-    svg(xmlns: 'http://www.w3.org/2000/svg', width: 42, height: 42) do
-      rect x: 0, y: 0, width: 42, height: 42, fill: 'white'
-      polygon points: '0,0 0,42 42,0', fill: 'black'
-      polygon points: '21,21 42,0 42,42', fill: 'red'
+    svg xmlns: 'http://www.w3.org/2000/svg', width: full, height: full do
+      rect x: 0, y: 0, width: full, height: full, fill: :white
+      polygon points: points([0, 0], [0, full], [full, 0]), fill: :black
+      polygon points: points([half, half], [full, 0], [full, full]), fill: :red
     end
   end
 
