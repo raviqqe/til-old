@@ -226,7 +226,11 @@ end
 
 
 def svg filename
-  Magick::Image.from_blob(File.read(filename))[0]
+  img, _ = Magick::Image.from_blob(File.read(filename)) do
+    self.format = 'SVG'
+  end
+
+  img
 end
 
 
