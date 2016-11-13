@@ -226,7 +226,8 @@ end
 
 
 def svg filename
-  img, _ = Magick::Image.from_blob(File.read(filename)) do
+  blob = File.read(filename).gsub(/([1-9]+)/, '\100')
+  img, _ = Magick::Image.from_blob(blob) do
     self.format = 'SVG'
   end
 
