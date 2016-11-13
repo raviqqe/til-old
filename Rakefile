@@ -143,7 +143,9 @@ rule '.html' => '.md' do |t|
         div do
           p_ do
             a 'top', href: '/', class: 'button'
-            a('back', href: (is_index_md(t.source) ? '..' : '.')) \
+            a('back', href: (in_history_dir(t.name) \
+                             ?  File.join('..', File.basename(t.name)) \
+                             : (is_index_md(t.source) ? '..' : '.'))) \
                 unless is_top_index_md(t.source)
           end
         end
