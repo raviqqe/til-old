@@ -236,7 +236,7 @@ end
 
 
 file 'apple-touch-icon.png' => 'icon.svg' do |t|
-  svg(t.source).resize(57, 57).write t.name
+  svg(t.source).resize(144, 144).write t.name
 end
 
 
