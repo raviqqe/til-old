@@ -1,3 +1,4 @@
+require 'rmagick'
 require 'map-rec'
 require 'rake/clean'
 require 'redcarpet'
@@ -224,8 +225,28 @@ file 'style.css' do |t|
 end
 
 
-task :default => Dir.glob('**/*.md').map{ |filename| filename.ext '.html' } \
-                 .push('style.css')
+def svg filename
+  img, _ = Magick::Image.from_blob File.read(filename) do
+    self.format = 'SVG'
+    self.background_color = 'transparent'
+  end
+
+  img
+end
 
 
-CLEAN.include Dir.glob(['**/*.html', '**/_history'])
+file 'favicon.ico' => 'icon.svg' do |t|
+  svg(t.source).resize(16, 16).write t.name
+end
+
+
+file 'apple-touch-icon.png' => 'icon.svg' do |t|
+  svg(t.source).resize(57, 57).write t.name
+end
+
+
+task :default => Dir.glob('**/*.md').map{ |filename| filename.ext '.html' } +
+                 %w(style.css apple-touch-icon.png favicon.ico)
+
+
+CLEAN.include Dir.glob(['**/*.html', '**/_history', '**/*.png', '**/*.ico'])
