@@ -225,9 +225,8 @@ file 'style.css' do |t|
 end
 
 
-def svg filename
-  blob = File.read(filename).gsub(/([1-9]+)/, '\100')
-  img, _ = Magick::Image.from_blob(blob) do
+def svg_icon filename
+  img, _ = Magick::Image.from_blob(File.read(filename)) do
     self.format = 'SVG'
   end
 
@@ -235,13 +234,28 @@ def svg filename
 end
 
 
-file 'favicon.ico' => 'icon.svg' do |t|
-  svg(t.source).resize(16, 16).write t.name
+ICON_SVG = 'icon.svg'
+
+file ICON_SVG do |t|
+  source = xml do
+    svg(xmlns: 'http://www.w3.org/2000/svg', width: 42, height: 42) do
+      rect x: 0, y: 0, width: 42, height: 42, fill: 'white'
+      polygon points: '0,0 0,42 42,0', fill: 'black'
+      polygon points: '21,21 42,0 42,42', fill: 'red'
+    end
+  end
+
+  File.write t.name, source
 end
 
 
-file 'apple-touch-icon.png' => 'icon.svg' do |t|
-  svg(t.source).resize(144, 144).write t.name
+file 'favicon.ico' => ICON_SVG do |t|
+  svg_icon(t.source).resize(16, 16).write t.name
+end
+
+
+file 'apple-touch-icon.png' => ICON_SVG do |t|
+  svg_icon(t.source).resize(144, 144).write t.name
 end
 
 
@@ -249,4 +263,5 @@ task :default => Dir.glob('**/*.md').map{ |filename| filename.ext '.html' } +
                  %w(style.css apple-touch-icon.png favicon.ico)
 
 
-CLEAN.include Dir.glob(['**/*.html', '**/_history', '**/*.png', '**/*.ico'])
+CLEAN.include Dir.glob(['**/*.html', '**/_history', '**/*.png', '**/*.ico',
+                        ICON_SVG])
