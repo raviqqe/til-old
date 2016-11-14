@@ -267,7 +267,7 @@ end
 
 
 file TOUCH_ICON => ICON_SVG do |t|
-  svg_icon(t.source).resize(144, 144).write t.name
+  svg_icon(t.source).resize(152, 152).write t.name
 end
 
 
