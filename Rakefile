@@ -83,6 +83,8 @@ def dir_page markdown, filename
 end
 
 
+FAVICON = 'favicon.png'
+TOUCH_ICON = 'apple-touch-icon.png'
 GIT_LOG = "git log --date='format:%A, %B %d, %Y'"
 
 rule '.html' => '.md' do |t|
@@ -100,10 +102,8 @@ rule '.html' => '.md' do |t|
         title(is_top_index_md(t.source) ? \
               title_name : get_title(t.source) + " | " + title_name)
         link rel: 'stylesheet', type: 'text/css', href: '/style.css'
-        link href: '/favicon.ico', type: 'image/x-icon', rel: 'shortcut icon'
-        link href: '/favicon.ico', type: 'image/x-icon', rel: 'icon'
-        link href: '/apple-touch-icon.png', type: 'image/png', \
-             rel: 'apple-touch-icon'
+        link href: "/#{FAVICON}", type: 'image/png', rel: 'icon'
+        link href: "/#{TOUCH_ICON}", type: 'image/png', rel: 'apple-touch-icon'
         meta name: 'viewport', content: 'width=device-width'
         base_dir = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0'
         link rel: 'stylesheet', href: "#{base_dir}/styles/default.min.css"
@@ -261,18 +261,18 @@ file ICON_SVG do |t|
 end
 
 
-file 'favicon.ico' => ICON_SVG do |t|
+file FAVICON => ICON_SVG do |t|
   svg_icon(t.source).resize(16, 16).write t.name
 end
 
 
-file 'apple-touch-icon.png' => ICON_SVG do |t|
+file TOUCH_ICON => ICON_SVG do |t|
   svg_icon(t.source).resize(144, 144).write t.name
 end
 
 
 task :default => Dir.glob('**/*.md').map{ |filename| filename.ext '.html' } +
-                 %w(style.css apple-touch-icon.png favicon.ico)
+                 ['style.css', TOUCH_ICON, FAVICON]
 
 
 CLEAN.include Dir.glob(['**/*.html', '**/_history', '**/*.png', '**/*.ico',
