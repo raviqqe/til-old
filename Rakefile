@@ -247,13 +247,12 @@ ICON_SVG = 'icon.svg'
 
 file ICON_SVG do |t|
   full = 4242
-  half = full / 2
 
   source = xml do
     svg xmlns: 'http://www.w3.org/2000/svg', width: full, height: full do
       rect x: 0, y: 0, width: full, height: full, fill: :white
+      polygon points: points([0, 0], [full, 0], [full, full]), fill: :red
       polygon points: points([0, 0], [0, full], [full, 0]), fill: :black
-      polygon points: points([half, half], [full, 0], [full, full]), fill: :red
     end
   end
 
