@@ -262,7 +262,7 @@ end
 
 
 file FAVICON => ICON_SVG do |t|
-  svg_icon(t.source).resize(16, 16).write t.name
+  svg_icon(t.source).resize(32, 32).write t.name
 end
 
 
