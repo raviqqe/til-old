@@ -131,12 +131,20 @@ rule '.html' => '.md' do |t|
           }
 
           a.top-link {
-            float: left;
-            color: black;
+            color: #333;
+            font-size: 1.2em;
+            font-weight: 500;
+            margin-left: 0.2em;
           }
 
           a.back {
-            float: right;
+            margin-right: 1em;
+          }
+
+          div.buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
           }
 
           @media only screen and (max-width: 480px) {
@@ -148,15 +156,13 @@ rule '.html' => '.md' do |t|
 
       body class: 'markdown-body' do
         unless is_top_index_md(t.source)
-          div do
+          div class: 'buttons' do
             a LOGO_TOP_TITLE, href: '/', class: 'top-link'
             a('back', href: (in_history_dir(t.name) \
                             ?  File.join('..', File.basename(t.name))
                             : (is_index_md(t.source) ? '..' : '.')),
                       class: 'back')
           end
-
-          div style: 'clear: both;'
 
           hr
         end
