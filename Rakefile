@@ -141,17 +141,18 @@ rule '.html' => '.md' do |t|
       end
 
       body class: 'markdown-body' do
-        div do
-          p_ do
-            a 'top', href: '/', class: 'button'
-            a('back', href: (in_history_dir(t.name) \
-                             ?  File.join('..', File.basename(t.name)) \
-                             : (is_index_md(t.source) ? '..' : '.'))) \
-                unless is_top_index_md(t.source)
+        unless is_top_index_md(t.source)
+          div do
+            p_ do
+              a 'top', href: '/', class: 'button'
+              a('back', href: (in_history_dir(t.name) \
+                              ?  File.join('..', File.basename(t.name)) \
+                              : (is_index_md(t.source) ? '..' : '.'))) \
+            end
           end
-        end
 
-        hr
+          hr
+        end
 
         markdown = File.read t.source
         markdown = markdown.gsub(
