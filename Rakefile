@@ -86,6 +86,8 @@ end
 FAVICON = 'favicon.png'
 TOUCH_ICON = 'apple-touch-icon.png'
 GIT_LOG = "git log --date='format:%A, %B %d, %Y'"
+TOP_TITLE = get_title('index.md')
+LOGO_TOP_TITLE = '<img src="/icon.svg" alt="logo" class="logo"/> ' + TOP_TITLE
 
 rule '.html' => '.md' do |t|
   unless in_history_dir(t.source)
@@ -98,9 +100,8 @@ rule '.html' => '.md' do |t|
   str = block_is_html do
     html do
       head do
-        top_title = "raviqqe's notes"
         title(is_top_index_md(t.source) ? \
-              top_title : get_title(t.source) + " | " + top_title)
+              TOP_TITLE : get_title(t.source) + " | " + TOP_TITLE)
         link rel: 'stylesheet', type: 'text/css', href: '/style.css'
         link href: "/#{FAVICON}", type: 'image/png', rel: 'icon'
         link href: "/#{TOUCH_ICON}", type: 'image/png', rel: 'apple-touch-icon'
@@ -155,8 +156,7 @@ rule '.html' => '.md' do |t|
         end
 
         markdown = File.read t.source
-        markdown = markdown.gsub(
-            /^# /, '# <img src="/icon.svg" alt="logo" class="logo"/>') \
+        markdown = markdown.gsub(/^# .*$/, "# #{LOGO_TOP_TITLE}") \
             if is_top_index_md(t.source)
         div((is_index_md(t.source) and not in_history_dir(t.source)) ?
             dir_page(markdown, t.source) : file_page(markdown))
