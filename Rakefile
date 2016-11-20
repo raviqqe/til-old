@@ -120,10 +120,6 @@ rule '.html' => '.md' do |t|
             padding: 45px;
           }
 
-          .button {
-            margin-right: 1em;
-          }
-
           .date {
             margin-right: 0.5em;
           }
@@ -134,8 +130,13 @@ rule '.html' => '.md' do |t|
             vertical-align: -0.15em;
           }
 
-          a.black {
+          a.top-link {
+            float: left;
             color: black;
+          }
+
+          a.back {
+            float: right;
           }
 
           @media only screen and (max-width: 480px) {
@@ -148,13 +149,14 @@ rule '.html' => '.md' do |t|
       body class: 'markdown-body' do
         unless is_top_index_md(t.source)
           div do
-            p_ do
-              a LOGO_TOP_TITLE, href: '/', class: 'button black'
-              a('back', href: (in_history_dir(t.name) \
-                              ?  File.join('..', File.basename(t.name)) \
-                              : (is_index_md(t.source) ? '..' : '.'))) \
-            end
+            a LOGO_TOP_TITLE, href: '/', class: 'top-link'
+            a('back', href: (in_history_dir(t.name) \
+                            ?  File.join('..', File.basename(t.name))
+                            : (is_index_md(t.source) ? '..' : '.')),
+                      class: 'back')
           end
+
+          div style: 'clear: both;'
 
           hr
         end
