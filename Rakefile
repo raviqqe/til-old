@@ -25,6 +25,11 @@ def file_page markdown
 end
 
 
+def markdown_escape text
+  text.gsub(/\*|_|`/, '\\\\\0')
+end
+
+
 def get_title path
   path = dir_to_index(path) if File.directory?(path)
   markdown_to_html(File.open(path).to_a[0].sub(/^# */, '').strip)
@@ -229,7 +234,8 @@ rule '.html' => '.md' do |t|
                                   .join("\n")
 
     mkdir_p history_dir unless Dir.exist? history_dir
-    File.write md_history_file, "# History of #{t.source}\n\n#{history}"
+    File.write(md_history_file,
+               "# History of #{markdown_escape t.source}\n\n#{history}")
     Rake::Task[md_history_file.ext 'html'].invoke
   end
 
