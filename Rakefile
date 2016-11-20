@@ -192,8 +192,8 @@ rule '.html' => '.md' do |t|
               span(dates[-1].sub('Date', 'Created') + ', ', class: 'date')
 
               span do
-                a 'History', href: File.join(HISTORY_DIR,
-                                             File.basename(t.name))
+                a('Page history',
+                  href: File.join(HISTORY_DIR, File.basename(t.name)))
               end
             end
           end
