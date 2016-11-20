@@ -98,9 +98,9 @@ rule '.html' => '.md' do |t|
   str = block_is_html do
     html do
       head do
-        title_name = "raviqqe's notes"
+        top_title = "raviqqe's notes"
         title(is_top_index_md(t.source) ? \
-              title_name : get_title(t.source) + " | " + title_name)
+              top_title : get_title(t.source) + " | " + top_title)
         link rel: 'stylesheet', type: 'text/css', href: '/style.css'
         link href: "/#{FAVICON}", type: 'image/png', rel: 'icon'
         link href: "/#{TOUCH_ICON}", type: 'image/png', rel: 'apple-touch-icon'
