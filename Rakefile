@@ -27,7 +27,8 @@ end
 
 def get_title path
   path = dir_to_index(path) if File.directory?(path)
-  markdown_to_html File.open(path).to_a[0].sub(/^# */, '').strip
+  markdown_to_html(File.open(path).to_a[0].sub(/^# */, '').strip)
+      .gsub(/(<p>|<\/p>)/, '')
 end
 
 
