@@ -134,6 +134,10 @@ rule '.html' => '.md' do |t|
             vertical-align: -0.15em;
           }
 
+          a.black {
+            color: black;
+          }
+
           @media only screen and (max-width: 480px) {
             body { padding: 1.5ex }
             .date { display: block }
@@ -145,7 +149,7 @@ rule '.html' => '.md' do |t|
         unless is_top_index_md(t.source)
           div do
             p_ do
-              a LOGO_TOP_TITLE, href: '/', class: 'button'
+              a LOGO_TOP_TITLE, href: '/', class: 'button black'
               a('back', href: (in_history_dir(t.name) \
                               ?  File.join('..', File.basename(t.name)) \
                               : (is_index_md(t.source) ? '..' : '.'))) \
