@@ -130,7 +130,7 @@ rule '.html' => '.md' do |t|
 
           img.logo {
             height: 1em;
-            margin-right: 0.5em;
+            margin-right: 0.2em;
             vertical-align: -0.15em;
           }
 
