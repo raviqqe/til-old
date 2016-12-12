@@ -91,9 +91,18 @@ $ tail /var/log/nsd.log
 
 If you are building your own authoritative server in public,
 the replies to queries must be with their AA bit on.
-So, then, you must run `nsd` alone, or pass queries to `nsd`
+Therefore, you must run `nsd` alone, or pass queries to `nsd`
 via `forward-zone:` directives in `unbound.conf`
 when `unbound` monopolizes the port 53.
+
+Also, you need to register your primary and/or secondary authoritative servers
+so that upper ones (for example, when your domain is "yourdomain.com", one
+authoritative for the ".com" domain).
+Specifically, I use the service of [onamae.com](https://www.onamae.com).
+I register a VPS named "ns0.raviqqe.com" with its IP address as a public
+authoritative server and it and "2nd.dnsv.jp" (the name of the
+secondary one privided by them for free!) as the primary and secondary ones on
+their website.
 
 
 ### Reallocation of ip addresses and ports
