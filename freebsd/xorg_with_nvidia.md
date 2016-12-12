@@ -3,12 +3,9 @@
 Posted on: 2016/4/20
 
 ```
-$ pkg install xorg-minimal
-$ mv /etc/X11/xorg.conf $HOME/xorg.conf.etc
-$ mv /usr/local/etc/X11/xorg.conf $HOME/xorg.conf.localetc
+$ pkg install xorg-minimal nvidia-driver
 $ Xorg -configure # make sure that this succeeds
 $ cp /root/xorg.conf.new /etc/X11/xorg.conf
-$ pkg install nvidia-driver
-$ echo 'nvidia_load="YES"' >> /boot/loader.conf
-$ echo 'linux_enable="YES"' >> /etc/rc.conf
+$ sysrc kld_list=nvidia-modeset
+$ sysrc linux_enable=YES
 ```
