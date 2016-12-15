@@ -1,0 +1,7 @@
+# SELinux
+
+## Check state
+
+```
+$ sestatus
+```
