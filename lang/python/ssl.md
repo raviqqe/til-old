@@ -1,4 +1,4 @@
-## Compiling Python with SSL support
+# Compiling Python with SSL support
 
 Edit `Modules/Setup.dist`. The example below works fine on FreeBSD 11.0 with openssl package installed.
 
