@@ -7,7 +7,9 @@ require 'xml-dsl'
 
 
 def markdown_to_html markdown
-  Redcarpet::Markdown::new(Redcarpet::Render::HTML, fenced_code_blocks: true).render markdown
+  Redcarpet::Markdown::new(Redcarpet::Render::HTML,
+                           fenced_code_blocks: true,
+                           no_intra_emphasis: true).render markdown
 end
 
 
