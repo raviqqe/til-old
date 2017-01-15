@@ -116,6 +116,7 @@ rule '.html' => '.md' do |t|
         link rel: 'stylesheet', href: "#{base_dir}/styles/default.min.css"
         script src: "#{base_dir}/highlight.min.js"
         script 'hljs.initHighlightingOnLoad();'
+        script src: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 
         style %(
           body {
