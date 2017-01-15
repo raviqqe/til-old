@@ -2,14 +2,12 @@
 
 ## Y\* combinator
 
-```
-\fs.
-  (\x. x x)
-  (\genfs. map (\f arg1 ... argN. f (genfs genfs) arg1 ... argN) fs)
-```
+$$
+\lambda fs. (\lambda x. x x) (\lambda genfs. map (\lambda f arg_1 \dots arg_n. f (genfs genfs) arg_1 \dots arg_n) fs)
+$$
 
 where
 
 $$
-fs\_i : [Function] -> X\_{i,1} -> X\_{i,2} -> ... -> X\_{i,m\_i} -> Y\_i
+fs_i : [Function] \rightarrow X_{i,1} \rightarrow X_{i,2} \rightarrow ... \rightarrow X_{i,m_i} \rightarrow Y_i
 $$
