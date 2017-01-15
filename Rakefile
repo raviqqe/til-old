@@ -1,15 +1,13 @@
 require 'rmagick'
 require 'map-rec'
 require 'rake/clean'
-require 'redcarpet'
+require 'kramdown'
 require 'xml-dsl'
 
 
 
 def markdown_to_html markdown
-  Redcarpet::Markdown::new(Redcarpet::Render::HTML,
-                           fenced_code_blocks: true,
-                           no_intra_emphasis: true).render markdown
+  Kramdown::Document.new(markdown).to_html
 end
 
 
