@@ -9,6 +9,6 @@ $$
 where
 
 $$
-f : [Function]
+f : [Function] \\
 f[i] : [Function] \rightarrow X_{i,1} \rightarrow X_{i,2} \rightarrow ... \rightarrow X_{i,m_i} \rightarrow Y_i
 $$
