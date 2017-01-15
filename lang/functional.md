@@ -3,11 +3,12 @@
 ## Y\* combinator
 
 $$
-\lambda fs. (\lambda x. x x) (\lambda genfs. map (\lambda f arg_1 \dots arg_n. f (genfs genfs) arg_1 \dots arg_n) fs)
+\lambda f. (\lambda x. x~x)~\lambda g. map~(\lambda f~a_1~\dots~a_n. f~(g~g)~a_1~\dots~a_n)~f
 $$
 
 where
 
 $$
-fs_i : [Function] \rightarrow X_{i,1} \rightarrow X_{i,2} \rightarrow ... \rightarrow X_{i,m_i} \rightarrow Y_i
+f : [Function]
+f[i] : [Function] \rightarrow X_{i,1} \rightarrow X_{i,2} \rightarrow ... \rightarrow X_{i,m_i} \rightarrow Y_i
 $$
