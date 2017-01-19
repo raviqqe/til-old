@@ -7,7 +7,10 @@ require 'xml-dsl'
 
 
 def markdown_to_html markdown
-  Kramdown::Document.new(markdown.gsub('```', '~~~'), auto_ids: true, entity_output: :numeric).to_html
+  Kramdown::Document.new(markdown.gsub('```', '~~~'),
+                         auto_ids: true,
+                         enable_coderay: false,
+                         entity_output: :numeric).to_html
 end
 
 
