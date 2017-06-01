@@ -4,97 +4,83 @@ require 'rake/clean'
 require 'kramdown'
 require 'xml-dsl'
 
-
-
-def markdown_to_html markdown
+def markdown_to_html(markdown)
   Kramdown::Document.new(markdown.gsub('```', '~~~'),
                          auto_ids: true,
                          enable_coderay: false,
                          entity_output: :numeric).to_html
 end
 
-
-def block_is_html &block
+def block_is_html(&block)
   array = map_rec(block_is_array(&block)) do |x|
     x.is_a?(Symbol) ? x.to_s.gsub(/_*$/, '').to_sym : x
   end
 
-  XML::from_array array, format: false
+  XML.from_array array, format: false
 end
 
-
-def file_page markdown
+def file_page(markdown)
   markdown_to_html markdown
 end
 
-
-def markdown_escape text
+def markdown_escape(text)
   text.gsub(/\*|_|`/, '\\\\\0')
 end
 
-
-def get_title path
+def get_title(path)
   path = dir_to_index(path) if File.directory?(path)
   markdown_to_html(File.open(path).to_a[0].sub(/^#+ */, '').strip)
-      .gsub(/(<p>|<\/p>)/, '').strip
+    .gsub(%r{(<p>|</p>)}, '').strip
 end
 
-
-def md_file_to_link path
+def md_file_to_link(path)
   link = is_index_md(path) ? File.dirname(path) : path.ext('html')
   "<a href=\"#{link}\">#{get_title(path)}</a>"
 end
 
-
-def md_files_to_links paths
+def md_files_to_links(paths)
   paths.map do |path|
     md_file_to_link path
   end.sort_by(&:downcase)
 end
 
-
-def dir_to_index path
+def dir_to_index(path)
   File.join path, 'index.md'
 end
 
-
-def is_index_md path
-  path =~ /(^|\/)index\.md$/
+def is_index_md(path)
+  path =~ %r{(^|/)index\.md$}
 end
 
-
-def is_top_index_md path
+def is_top_index_md(path)
   path == 'index.md'
 end
 
+HISTORY_DIR = '_history'.freeze
 
-HISTORY_DIR = '_history'
-
-def in_history_dir path
-  path =~ /(^|\/)#{HISTORY_DIR}/
+def in_history_dir(path)
+  path =~ %r{(^|/)#{HISTORY_DIR}}
 end
 
-
-def dir_page markdown, filename
+def dir_page(markdown, filename)
   Dir.chdir File.dirname(filename) do
     md_files = Dir.entries('.').select do |path|
-      path !~ /^\.+$/ and not is_index_md(path) and not in_history_dir(path)
+      path !~ /^\.+$/ && !is_index_md(path) && !in_history_dir(path)
     end.map do |path|
       File.directory?(path) ? dir_to_index(path) : path
     end.select do |path|
-      File.exist?(path) and path =~ /\.md$/
+      File.exist?(path) && path =~ /\.md$/
     end
 
     markdown_to_html(markdown + "\n" +
                      md_files_to_links(md_files)
-                     .map{ |link| '- ' + link }.join("\n"))
+                     .map { |link| '- ' + link }.join("\n"))
   end
 end
 
-
-FAVICON = 'favicon.png'
-TOUCH_ICON = 'apple-touch-icon.png'
-GIT_LOG = "git log --date='format:%A, %B %d, %Y'"
+FAVICON = 'favicon.png'.freeze
+TOUCH_ICON = 'apple-touch-icon.png'.freeze
+GIT_LOG = "git log --date='format:%A, %B %d, %Y'".freeze
 TOP_TITLE = get_title('index.md')
 LOGO_TOP_TITLE = '<img src="/icon.svg" alt="logo" class="logo"/> ' + TOP_TITLE
 
@@ -110,7 +96,7 @@ rule '.html' => '.md' do |t|
     html do
       head do
         title(is_top_index_md(t.source) ? \
-              TOP_TITLE : get_title(t.source) + " | " + TOP_TITLE)
+              TOP_TITLE : get_title(t.source) + ' | ' + TOP_TITLE)
         link rel: 'stylesheet', type: 'text/css', href: '/style.css'
         link href: "/#{FAVICON}", type: 'image/png', rel: 'icon'
         link href: "/#{TOUCH_ICON}", type: 'image/png', rel: 'apple-touch-icon'
@@ -169,7 +155,7 @@ rule '.html' => '.md' do |t|
           div class: 'buttons' do
             a LOGO_TOP_TITLE, href: '/', class: 'top-link'
             a('back', href: (in_history_dir(t.name) \
-                            ?  File.join('..', File.basename(t.name))
+                            ? File.join('..', File.basename(t.name))
                             : (is_index_md(t.source) ? '..' : '.')),
                       class: 'back')
           end
@@ -180,7 +166,7 @@ rule '.html' => '.md' do |t|
         markdown = File.read t.source
         markdown = markdown.gsub(/^# .*$/, "# #{LOGO_TOP_TITLE}") \
             if is_top_index_md(t.source)
-        div((is_index_md(t.source) and not in_history_dir(t.source)) ?
+        div(is_index_md(t.source) && !in_history_dir(t.source) ?
             dir_page(markdown, t.source) : file_page(markdown))
 
         if is_top_index_md(t.source)
@@ -188,12 +174,12 @@ rule '.html' => '.md' do |t|
             h2 'Change log'
 
             ul do
-              `#{GIT_LOG} --name-only -p '*.md'`.split('commit').select do |s|
-                not s.include? 'Merge'
+              `#{GIT_LOG} --name-only -p '*.md'`.split('commit').reject do |s|
+                s.include? 'Merge'
               end.each do |chunk|
-                lines = chunk.split("\n").select{ |s| s.strip != '' }[2..-1]
+                lines = chunk.split("\n").reject { |s| s.strip == '' }[2..-1]
                 next unless lines
-                date, comment = lines.map { |s| s.strip }
+                date, comment = lines.map(&:strip)
                 files = lines[2..-1]
                 next unless files
                 files = files.select { |file| File.exist? file }
@@ -227,14 +213,14 @@ rule '.html' => '.md' do |t|
           [The Unlicense](https://unlicense.org/UNLICENSE) with this work
           has waived all copyright and related or neighboring rights to this
           work.
-        ".split.join ' ')
+        ".split.join(' '))
       end
     end
   end
 
   unless in_history_dir(t.source)
     history = `#{history_command}`.split("\n") \
-                                  .map{ |s| '    ' + s } \
+                                  .map { |s| '    ' + s } \
                                   .join("\n")
 
     mkdir_p history_dir unless Dir.exist? history_dir
@@ -246,29 +232,25 @@ rule '.html' => '.md' do |t|
   File.write t.name, str
 end
 
-
 file 'style.css' do |t|
   sh "curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css > #{t.name}"
 end
 
-
-def svg_icon filename
-  img, _ = Magick::Image.from_blob(File.read(filename)) do
+def svg_icon(filename)
+  img, = Magick::Image.from_blob(File.read(filename)) do
     self.format = 'SVG'
   end
 
   img
 end
 
-
-def points *points
+def points(*points)
   points.map do |x, y|
     "#{x},#{y}"
   end.join ' '
 end
 
-
-ICON_SVG = 'icon.svg'
+ICON_SVG = 'icon.svg'.freeze
 
 file ICON_SVG do |t|
   full = 4242
@@ -284,20 +266,16 @@ file ICON_SVG do |t|
   File.write t.name, source
 end
 
-
 file FAVICON => ICON_SVG do |t|
   svg_icon(t.source).resize(32, 32).write t.name
 end
-
 
 file TOUCH_ICON => ICON_SVG do |t|
   svg_icon(t.source).resize(152, 152).write t.name
 end
 
-
-task :default => Dir.glob('**/*.md').map{ |filename| filename.ext '.html' } +
-                 ['style.css', TOUCH_ICON, FAVICON]
-
+task default: Dir.glob('**/*.md').map { |filename| filename.ext '.html' } +
+              ['style.css', TOUCH_ICON, FAVICON]
 
 CLEAN.include Dir.glob(['**/*.html', '**/_history', '**/*.png', '**/*.ico',
                         ICON_SVG])
