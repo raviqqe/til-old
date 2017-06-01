@@ -17,7 +17,6 @@ task :baz => :bar do
 end
 ```
 
-
 ## Overwriting tasks
 
 ```
@@ -30,7 +29,6 @@ task :foo do
   puts "bar"
 end
 ```
-
 
 ## Cleaning chains
 
