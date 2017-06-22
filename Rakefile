@@ -101,7 +101,7 @@ rule '.html' => '.md' do |t|
         link href: "/#{FAVICON}", type: 'image/png', rel: 'icon'
         link href: "/#{TOUCH_ICON}", type: 'image/png', rel: 'apple-touch-icon'
         meta name: 'viewport', content: 'width=device-width'
-        base_dir = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0'
+        base_dir = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0'
         link rel: 'stylesheet', href: "#{base_dir}/styles/default.min.css"
         script src: "#{base_dir}/highlight.min.js"
         script 'hljs.initHighlightingOnLoad();'
